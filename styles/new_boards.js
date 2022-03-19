@@ -292,6 +292,7 @@ export const SetLabel = styled.label`
   cursor: pointer;
 `;
 
+// 등록하기 감싸기
 export const RegisterWrap = styled.div`
   width: 100%;
 
@@ -302,6 +303,7 @@ export const RegisterWrap = styled.div`
   padding-top: 80px;
 `;
 
+//등록하기 버튼
 export const RegisterButton = styled.button`
   width: 179px;
   height: 52px;

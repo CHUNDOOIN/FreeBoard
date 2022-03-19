@@ -34,9 +34,9 @@ import {
   SetLabel,
   RegisterWrap,
   RegisterButton,
-} from "../../../styles/boards";
+} from "../../../styles/new_boards";
 
-export default function Boards() {
+export default function NewBoardPage() {
   // 자바스크립트 작성
 
   return (
