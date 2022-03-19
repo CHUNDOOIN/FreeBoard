@@ -1,23 +1,39 @@
 import {
   Wrap,
-  Title_text,
-  Info,
-  Info_title,
-  Info_left,
-  Info_name,
-  Info_right,
-  Info_password,
-  Title,
-  Title_title,
-  Title_input,
-  Main,
-  Main_title,
-  Main_in,
-  Address,
-  Youtube,
-  Photo,
-  Setting,
-  Join,
+  TitleText,
+  InfoWrap,
+  InfoWrapLeft,
+  LeftWriter,
+  LeftWriterInput,
+  InfoWrapRight,
+  RightPassword,
+  RightPasswordInput,
+  TitleWrap,
+  TitleTitle,
+  TitleInput,
+  MainWrap,
+  MainTitle,
+  MainInput,
+  AddressWrap,
+  AddressTitle,
+  ZipCodeWrap,
+  ZipCode,
+  ZipCodeSearch,
+  AddressInput1,
+  AddressInput2,
+  YoutubeWrap,
+  YoutubeWrapTitle,
+  YoutubeWrapInput,
+  ImageWrap,
+  ImageTitle,
+  ImageUploadWrap,
+  ImageUpload,
+  SetWrap,
+  SetTitle,
+  SetButton,
+  SetLabel,
+  RegisterWrap,
+  RegisterButton,
 } from "../../../styles/boards";
 
 export default function Boards() {
@@ -25,34 +41,82 @@ export default function Boards() {
 
   return (
     <Wrap>
-      <Title_text>게시물 등록</Title_text>
-      <Info_title>
-        <Info_name>작성자</Info_name>
-        <Info_password>비밀번호</Info_password>
-      </Info_title>
-      <Info>
-        <Info_left type="text" placeholder="이름을 적어주세요."></Info_left>
-        <Info_right
-          type="password"
-          placeholder="비밀번호를 입력해주세요."
-        ></Info_right>
-      </Info>
-      <Title>
-        <Title_title>제목</Title_title>
-        <Title_input
+      <TitleText>게시물 등록</TitleText>
+
+      <InfoWrap>
+        <InfoWrapLeft>
+          <LeftWriter>작성자</LeftWriter>
+          <LeftWriterInput
+            type="text"
+            placeholder="이름을 적어주세요."
+          ></LeftWriterInput>
+        </InfoWrapLeft>
+        <InfoWrapRight>
+          <RightPassword>비밀번호</RightPassword>
+          <RightPasswordInput
+            type="password"
+            placeholder="비밀번호를 입력해주세요."
+          ></RightPasswordInput>
+        </InfoWrapRight>
+      </InfoWrap>
+
+      <TitleWrap>
+        <TitleTitle>제목</TitleTitle>
+        <TitleInput type="text" placeholder="제목을 작성해주세요."></TitleInput>
+      </TitleWrap>
+
+      <MainWrap>
+        <MainTitle>내용</MainTitle>
+        <MainInput placeholder="내용을 작성해주세요."></MainInput>
+      </MainWrap>
+
+      <AddressWrap>
+        <AddressTitle>주소</AddressTitle>
+        <ZipCodeWrap>
+          <ZipCode placeholder="14338"></ZipCode>
+          <ZipCodeSearch>우편번호 검색</ZipCodeSearch>
+        </ZipCodeWrap>
+        <AddressInput1></AddressInput1>
+        <AddressInput2></AddressInput2>
+      </AddressWrap>
+
+      <YoutubeWrap>
+        <YoutubeWrapTitle>유튜브</YoutubeWrapTitle>
+        <YoutubeWrapInput
           type="text"
-          placeholder="제목을 작성해주세요."
-        ></Title_input>
-      </Title>
-      <Main>
-        <Main_title>내용</Main_title>
-        <Main_in type="text" placeholder="내용을 작성해주세요."></Main_in>
-      </Main>
-      <Address></Address>
-      <Youtube></Youtube>
-      <Photo></Photo>
-      <Setting></Setting>
-      <Join></Join>
+          placeholder="링크를 복사해주세요."
+        ></YoutubeWrapInput>
+      </YoutubeWrap>
+
+      <ImageWrap>
+        <ImageTitle>사진 첨부</ImageTitle>
+        <ImageUploadWrap>
+          <ImageUpload>
+            +<br />
+            Upload
+          </ImageUpload>
+          <ImageUpload>
+            +<br />
+            Upload
+          </ImageUpload>
+          <ImageUpload>
+            +<br />
+            Upload
+          </ImageUpload>
+        </ImageUploadWrap>
+      </ImageWrap>
+
+      <SetWrap>
+        <SetTitle>메인 설정</SetTitle>
+        <SetButton type="radio" name="gender" />
+        <SetLabel>유튜브</SetLabel>
+        <SetButton type="radio" name="gender" />
+        <SetLabel>사진</SetLabel>
+      </SetWrap>
+
+      <RegisterWrap>
+        <RegisterButton>등록하기</RegisterButton>
+      </RegisterWrap>
     </Wrap>
   );
 
