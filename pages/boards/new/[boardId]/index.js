@@ -1,3 +1,6 @@
+import { useQuery, gql } from "@apollo/client";
+import { useRouter } from "next/router";
+
 import {
   Wrap,
   HeaderWrap,
@@ -27,8 +30,49 @@ import {
   RightNumber,
 } from "../../../../styles/detail_board";
 
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      boardAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+      }
+      user {
+        _id
+        email
+        name
+        picture
+        userPoint {
+          amount
+        }
+      }
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
+
 export default function DetailBoardPage() {
+  const router = useRouter();
+  console.log(router);
   // 자바스크립트 작성
+
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: { boardId: router.query.boardId },
+  });
+
+  console.log(data);
 
   return (
     <Wrap>
@@ -54,10 +98,16 @@ export default function DetailBoardPage() {
       </HeaderWrap>
 
       <MainWrap>
-        <MainTitle>게시글 제목입니다.</MainTitle>
+        <MainTitle>
+          {data === data?.fetchBoard.title
+            ? " loading... "
+            : data?.fetchBoard.title}
+        </MainTitle>
         <MainImg src={"/detail_boards/main.png"}></MainImg>
         <MainContents>
-          가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하
+          {data === data?.fetchBoard.contents
+            ? " loading... "
+            : data?.fetchBoard.contents}
         </MainContents>
       </MainWrap>
 
@@ -68,11 +118,19 @@ export default function DetailBoardPage() {
       <BottomWrap>
         <BottomLeft>
           <LeftUp src={"/detail_boards/up.png"}></LeftUp>
-          <LeftNumber>1920</LeftNumber>
+          <LeftNumber>
+            {data === data?.fetchBoard.likeCount
+              ? " loading... "
+              : data?.fetchBoard.likeCount}
+          </LeftNumber>
         </BottomLeft>
         <BottomRight>
           <RightDown src={"/detail_boards/down.png"}></RightDown>
-          <RightNumber>1920</RightNumber>
+          <RightNumber>
+            {data === data?.fetchBoard.dislikeCount
+              ? " loading... "
+              : data?.fetchBoard.dislikeCount}
+          </RightNumber>
         </BottomRight>
       </BottomWrap>
     </Wrap>

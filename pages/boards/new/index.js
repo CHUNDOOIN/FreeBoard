@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/router";
+
 import {
   Wrap,
   TitleText,
@@ -36,8 +40,73 @@ import {
   RegisterButton,
 } from "../../../styles/new_boards";
 
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
+
 export default function NewBoardPage() {
   // 자바스크립트 작성
+  const [writer, setWriter] = useState("");
+  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
+
+  const [createBoard] = useMutation(CREATE_BOARD);
+  const [data, setData] = useState();
+  const router = useRouter();
+
+  const onClickSubmit = async () => {
+    try {
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: writer,
+            password: password,
+            title: title,
+            contents: contents,
+          },
+        },
+      });
+      // console.log(result.data.createBoard._id);
+      alert("게시글 등록!");
+      router.push(`/boards/new/${result.data.createBoard._id}`);
+    } catch (error) {
+      alert(error.message);
+    }
+
+    // console.log(result.data);
+    // setData(result.data.createBoard.message);
+  };
+
+  const onChangeWriter = (e) => {
+    setWriter(e.target.value);
+  };
+
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onChangeContents = (e) => {
+    setContents(e.target.value);
+  };
 
   return (
     <Wrap>
@@ -47,6 +116,7 @@ export default function NewBoardPage() {
         <InfoWrapLeft>
           <LeftWriter>작성자</LeftWriter>
           <LeftWriterInput
+            onChange={onChangeWriter}
             type="text"
             placeholder="이름을 적어주세요."
           ></LeftWriterInput>
@@ -54,6 +124,7 @@ export default function NewBoardPage() {
         <InfoWrapRight>
           <RightPassword>비밀번호</RightPassword>
           <RightPasswordInput
+            onChange={onChangePassword}
             type="password"
             placeholder="비밀번호를 입력해주세요."
           ></RightPasswordInput>
@@ -62,12 +133,19 @@ export default function NewBoardPage() {
 
       <TitleWrap>
         <TitleTitle>제목</TitleTitle>
-        <TitleInput type="text" placeholder="제목을 작성해주세요."></TitleInput>
+        <TitleInput
+          onChange={onChangeTitle}
+          type="text"
+          placeholder="제목을 작성해주세요."
+        ></TitleInput>
       </TitleWrap>
 
       <MainWrap>
         <MainTitle>내용</MainTitle>
-        <MainInput placeholder="내용을 작성해주세요."></MainInput>
+        <MainInput
+          onChange={onChangeContents}
+          placeholder="내용을 작성해주세요."
+        ></MainInput>
       </MainWrap>
 
       <AddressWrap>
@@ -115,7 +193,7 @@ export default function NewBoardPage() {
       </SetWrap>
 
       <RegisterWrap>
-        <RegisterButton>등록하기</RegisterButton>
+        <RegisterButton onClick={onClickSubmit}>등록하기</RegisterButton>
       </RegisterWrap>
     </Wrap>
   );
