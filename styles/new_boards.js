@@ -312,3 +312,10 @@ export const RegisterButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+
+// 에러 메시지 출력
+export const Error = styled.div`
+  padding-top: 10px;
+  font-size: 14px;
+  color: red;
+`;

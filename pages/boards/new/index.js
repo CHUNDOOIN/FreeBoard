@@ -38,6 +38,7 @@ import {
   SetLabel,
   RegisterWrap,
   RegisterButton,
+  Error,
 } from "../../../styles/new_boards";
 
 const CREATE_BOARD = gql`
@@ -60,52 +61,83 @@ const CREATE_BOARD = gql`
 
 export default function NewBoardPage() {
   // 자바스크립트 작성
+  const router = useRouter();
+
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
 
+  const [writerError, setWriterError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [contentsError, setContentsError] = useState("");
+
   const [createBoard] = useMutation(CREATE_BOARD);
   const [data, setData] = useState();
-  const router = useRouter();
+
+  const onChangeWriter = (event) => {
+    setWriter(event.target.value);
+    if (event.target.value !== "") {
+      setWriterError("");
+    }
+  };
+
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+    if (event.target.value !== "") {
+      setPasswordError("");
+    }
+  };
+
+  const onChangeTitle = (event) => {
+    setTitle(event.target.value);
+    if (event.target.value !== "") {
+      setTitleError("");
+    }
+  };
+
+  const onChangeContents = (event) => {
+    setContents(event.target.value);
+    if (event.target.value !== "") {
+      setContentsError("");
+    }
+  };
 
   const onClickSubmit = async () => {
-    try {
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: writer,
-            password: password,
-            title: title,
-            contents: contents,
-          },
-        },
-      });
-      // console.log(result.data.createBoard._id);
-      alert("게시글 등록!");
-      router.push(`/boards/${result.data.createBoard._id}`);
-    } catch (error) {
-      alert(error.message);
+    if (writer === "") {
+      setWriterError("작성자를 입력해주세요.");
     }
-
+    if (password === "") {
+      setPasswordError("비밀번호를 입력해주세요.");
+    }
+    if (title === "") {
+      setTitleError("제목을 입력해주세요.");
+    }
+    if (contents === "") {
+      setContentsError("내용을 입력해주세요.");
+    }
+    if (writer !== "" && password !== "" && title !== "" && contents !== "") {
+      try {
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer: writer,
+              password: password,
+              title: title,
+              contents: contents,
+            },
+          },
+        });
+        // console.log(result.data.createBoard._id);
+        alert("게시글 등록!");
+        router.push(`/boards/${result.data.createBoard._id}`);
+      } catch (error) {
+        alert(error.message);
+      }
+    }
     // console.log(result.data);
     // setData(result.data.createBoard.message);
-  };
-
-  const onChangeWriter = (e) => {
-    setWriter(e.target.value);
-  };
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const onChangeTitle = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const onChangeContents = (e) => {
-    setContents(e.target.value);
   };
 
   return (
@@ -120,6 +152,7 @@ export default function NewBoardPage() {
             type="text"
             placeholder="이름을 적어주세요."
           ></LeftWriterInput>
+          <Error>{writerError}</Error>
         </InfoWrapLeft>
         <InfoWrapRight>
           <RightPassword>비밀번호</RightPassword>
@@ -128,6 +161,7 @@ export default function NewBoardPage() {
             type="password"
             placeholder="비밀번호를 입력해주세요."
           ></RightPasswordInput>
+          <Error>{passwordError}</Error>
         </InfoWrapRight>
       </InfoWrap>
 
@@ -138,6 +172,7 @@ export default function NewBoardPage() {
           type="text"
           placeholder="제목을 작성해주세요."
         ></TitleInput>
+        <Error>{titleError}</Error>
       </TitleWrap>
 
       <MainWrap>
@@ -146,6 +181,7 @@ export default function NewBoardPage() {
           onChange={onChangeContents}
           placeholder="내용을 작성해주세요."
         ></MainInput>
+        <Error>{contentsError}</Error>
       </MainWrap>
 
       <AddressWrap>

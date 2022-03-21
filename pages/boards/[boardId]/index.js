@@ -69,7 +69,7 @@ export default function DetailBoardPage() {
   // 자바스크립트 작성
 
   const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: router.query.boardId },
+    variables: { boardId: String(router.query.boardId) },
   });
 
   console.log(data);
