@@ -28,7 +28,7 @@ import {
   BottomRight,
   RightDown,
   RightNumber,
-} from "../../../../styles/detail_board";
+} from "../../../styles/detail_board";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
