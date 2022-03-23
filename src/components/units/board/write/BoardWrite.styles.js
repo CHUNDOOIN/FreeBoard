@@ -305,10 +305,15 @@ export const RegisterWrap = styled.div`
 export const RegisterButton = styled.button`
   width: 179px;
   height: 52px;
-  background: #ffd600;
 
-  border: none;
+  color: #828282;
+  border: 1px solid #bdbdbd;
+
   cursor: pointer;
+  /* :hover {
+    background-color: #ffd600;
+    color: #000000;
+  } */
 `;
 
 // 에러 메시지 출력

@@ -4,11 +4,16 @@ import styled from "@emotion/styled";
 export const Wrap = styled.div`
   width: 1200px;
   margin: 100px auto;
+`;
+
+export const InWrap = styled.div`
   padding: 60px 102px 100px 102px;
 
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 `;
+
+export const OutWrap = styled.div``;
 
 // 상단 페이지 감싸주는 태그
 export const HeaderWrap = styled.div`
@@ -248,4 +253,31 @@ export const RightNumber = styled.div`
   color: #828282;
 
   text-align: center;
+`;
+
+export const ButtonWarp = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+export const Button = styled.button`
+  width: 179px;
+  height: 45px;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  color: #828282;
+  border: 1px solid #bdbdbd;
+
+  margin: 80px 12px 0px 12px;
+
+  cursor: pointer;
+  :hover {
+    background-color: #ffd600;
+    color: #000000;
+  }
 `;
