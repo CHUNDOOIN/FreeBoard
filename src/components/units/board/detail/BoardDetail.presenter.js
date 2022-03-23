@@ -8,7 +8,9 @@ export default function BoardDetailUI(props) {
           <S.LeftImg src={"/detail_boards/user.png"}></S.LeftImg>
           <S.LeftWrap>
             <S.LeftTitle>{props.data?.fetchBoard.writer}</S.LeftTitle>
-            <S.LeftDate>Date : 2021.02.18</S.LeftDate>
+            <S.LeftDate>
+              {props.data?.fetchBoard.updatedAt.slice(0, 10)}
+            </S.LeftDate>
           </S.LeftWrap>
         </S.HeaderLeft>
         <S.HeaderRight>
@@ -26,7 +28,7 @@ export default function BoardDetailUI(props) {
 
       <S.MainWrap>
         <S.MainTitle>{props.data?.fetchBoard.title}</S.MainTitle>
-        <S.MainImg src={"/detail_boards/main.png"}></S.MainImg>
+        <S.MainImg src={[props.data?.fetchBoard.title]}></S.MainImg>
         <S.MainContents>{props.data?.fetchBoard.contents}</S.MainContents>
       </S.MainWrap>
 

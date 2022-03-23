@@ -146,7 +146,7 @@ export const MainImg = styled.img`
   width: 100%;
   height: 480px;
 
-  background-color: red;
+  background-color: aliceblue;
   margin-bottom: 40px;
 `;
 
