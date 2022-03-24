@@ -90,7 +90,10 @@ export default function BoardWriteUI(props) {
       </S.SetWrap>
 
       <S.RegisterWrap>
-        <S.RegisterButton onClick={props.onClickSubmit}>
+        <S.RegisterButton
+          onClick={props.onClickSubmit}
+          isActive={props.isActive}
+        >
           등록하기
         </S.RegisterButton>
       </S.RegisterWrap>

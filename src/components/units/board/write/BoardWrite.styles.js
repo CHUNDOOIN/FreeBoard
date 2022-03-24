@@ -259,6 +259,7 @@ export const ImageUpload = styled.button`
   background-color: #bdbdbd;
   margin-right: 24px;
 
+  color: #4f4f4f;
   border: none;
   cursor: pointer;
 `;
@@ -306,9 +307,9 @@ export const RegisterButton = styled.button`
   width: 179px;
   height: 52px;
 
-  color: #828282;
+  color: #4f4f4f;
   border: 1px solid #bdbdbd;
-
+  background-color: ${(props) => (props.isActive ? "#ffd600" : "#BDBDBD;")};
   cursor: pointer;
   /* :hover {
     background-color: #ffd600;
