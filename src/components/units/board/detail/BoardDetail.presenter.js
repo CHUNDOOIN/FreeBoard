@@ -53,8 +53,8 @@ export default function BoardDetailUI(props) {
 
       <S.OutWrap>
         <S.ButtonWarp>
-          <S.Button>목록으로</S.Button>
-          <S.Button>수정하기</S.Button>
+          <S.Button onClick={props.onClickMoveList}>목록으로</S.Button>
+          <S.Button onClick={props.onClickMoveEdit}>수정하기</S.Button>
           <S.Button>삭제하기</S.Button>
         </S.ButtonWarp>
       </S.OutWrap>

@@ -14,5 +14,22 @@ export default function BoardDetail() {
 
   console.log(data);
 
-  return <BoardDetailUI data={data}></BoardDetailUI>;
+  const onClickMoveList = () => {
+    console.log("리스트로 이동합니다.");
+    router.push("/boards");
+  };
+
+  const onClickMoveEdit = () => {
+    console.log("수정 페이지로 이동합니다.");
+    router.push(`/boards/${router.query.boardId}/edit`);
+  };
+
+  return (
+    <BoardDetailUI
+      onClickMoveList={onClickMoveList}
+      onClickMoveEdit={onClickMoveEdit}
+      // onClickMoveDelete={onClickMoveList}
+      data={data}
+    ></BoardDetailUI>
+  );
 }
