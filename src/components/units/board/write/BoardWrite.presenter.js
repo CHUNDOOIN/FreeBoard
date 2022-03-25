@@ -3,7 +3,7 @@ import * as S from "./BoardWrite.styles";
 export default function BoardWriteUI(props) {
   return (
     <S.Wrap>
-      <S.TitleText>게시물{props.isEdit ? "등록" : "수정"}</S.TitleText>
+      <S.TitleText>게시물{props.isEdit ? "수정" : "등록"}</S.TitleText>
 
       <S.InfoWrap>
         <S.InfoWrapLeft>
@@ -13,6 +13,7 @@ export default function BoardWriteUI(props) {
             type="text"
             placeholder="이름을 적어주세요."
             defaultValue={props.data?.fetchBoard.writer}
+            readOnly={props.data?.fetchBoard.writer}
           ></S.LeftWriterInput>
           <S.Error>{props.writerError}</S.Error>
         </S.InfoWrapLeft>
@@ -94,10 +95,10 @@ export default function BoardWriteUI(props) {
 
       <S.RegisterWrap>
         <S.RegisterButton
-          onClick={props.isEdit ? props.onClickSubmit : props.onClickEdit}
-          isActive={props.isActive}
+          onClick={props.isEdit ? props.onClickEdit : props.onClickSubmit}
+          isActive={props.isEdit ? true : props.isActive}
         >
-          {props.isEdit ? "등록" : "수정"}하기
+          {props.isEdit ? "수정" : "등록"}하기
         </S.RegisterButton>
       </S.RegisterWrap>
     </S.Wrap>

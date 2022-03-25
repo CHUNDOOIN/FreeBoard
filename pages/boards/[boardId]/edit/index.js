@@ -10,5 +10,5 @@ export default function BoardEditPage() {
     variables: { boardId: router.query.boardId },
   });
 
-  return <BoardWrite isEdit={false} data={data}></BoardWrite>;
+  return <BoardWrite isEdit={true} data={data}></BoardWrite>;
 }
