@@ -1,6 +1,8 @@
+import { ChangeEvent } from "react";
 import * as S from "./BoardWrite.styles";
+import { IBoardWriteUIProps } from "./BoardWrite.types";
 
-export default function BoardWriteUI(props) {
+export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
     <S.Wrap>
       <S.TitleText>게시물{props.isEdit ? "수정" : "등록"}</S.TitleText>
@@ -17,6 +19,7 @@ export default function BoardWriteUI(props) {
           ></S.LeftWriterInput>
           <S.Error>{props.writerError}</S.Error>
         </S.InfoWrapLeft>
+
         <S.InfoWrapRight>
           <S.RightPassword>비밀번호</S.RightPassword>
           <S.RightPasswordInput

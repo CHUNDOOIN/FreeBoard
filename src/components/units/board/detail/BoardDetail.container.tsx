@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useQuery, gql, useMutation } from "@apollo/client";
 import BoardDetailUI from "./BoardDetail.presenter";
 import { FETCH_BOARD, DELETE_BOARD } from "./BoardDetail.queries";
+import { MouseEvent } from "react";
 
 export default function BoardDetail() {
   const [deleteBoard] = useMutation(DELETE_BOARD);
@@ -26,7 +27,7 @@ export default function BoardDetail() {
     router.push(`/boards/${router.query.boardId}/edit`);
   };
 
-  const onClickDelete = (event) => {
+  const onClickDelete = (event: MouseEvent<HTMLButtonElement>) => {
     deleteBoard({
       variables: { boardId: router.query.boardId },
     });

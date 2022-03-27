@@ -1,6 +1,8 @@
+import { MouseEvent } from "react";
+import { IBoardDetailUI } from "./BoardDetail.types";
 import * as S from "./BoardDetail.styles";
 
-export default function BoardDetailUI(props) {
+export default function BoardDetailUI(props: IBoardDetailUI) {
   return (
     <S.Wrap>
       <S.InWrap>
@@ -31,7 +33,7 @@ export default function BoardDetailUI(props) {
 
         <S.MainWrap>
           <S.MainTitle>{props.data?.fetchBoard.title}</S.MainTitle>
-          <S.MainImg src={[props.data?.fetchBoard.title]}></S.MainImg>
+          <S.MainImg src={props.data?.fetchBoard.title}></S.MainImg>
           <S.MainContents>{props.data?.fetchBoard.contents}</S.MainContents>
         </S.MainWrap>
 

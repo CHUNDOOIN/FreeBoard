@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation, gql } from "@apollo/client";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.types";
 
-export default function BoardWrite(props) {
+export default function BoardWrite(props: IBoardWriteProps) {
   const [isActive, setIsActive] = useState(false);
   const router = useRouter();
 
@@ -22,7 +23,7 @@ export default function BoardWrite(props) {
   const [updateBoard] = useMutation(UPDATE_BOARD);
   const [data, setData] = useState();
 
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
     if (event.target.value !== "") {
       setWriterError("");
@@ -34,7 +35,7 @@ export default function BoardWrite(props) {
     }
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     if (event.target.value !== "") {
       setPasswordError("");
@@ -46,7 +47,7 @@ export default function BoardWrite(props) {
     }
   };
 
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
     if (event.target.value !== "") {
       setTitleError("");
@@ -58,7 +59,7 @@ export default function BoardWrite(props) {
     }
   };
 
-  const onChangeContents = (event) => {
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
     if (event.target.value !== "") {
       setContentsError("");
@@ -71,7 +72,7 @@ export default function BoardWrite(props) {
   };
 
   const onClickEdit = async () => {
-    const updateBoardInput = {};
+    const updateBoardInput: IUpdateBoardInput = {};
     console.log("수정버튼");
     if (title !== "") {
       updateBoardInput.title = title;
@@ -90,8 +91,9 @@ export default function BoardWrite(props) {
       });
       alert("게시글을 수정 하였습니다!");
       router.push(`/boards/${router.query.boardId}`);
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message);
+      console.log(error);
     }
   };
 
@@ -123,7 +125,7 @@ export default function BoardWrite(props) {
         // console.log(result.data.createBoard._id);
         alert("게시글을 등록 하였습니다!");
         router.push(`/boards/${result.data.createBoard._id}`);
-      } catch (error) {
+      } catch (error: any) {
         alert(error.message);
         alert("게시글을 등록 실패 하였습니다!");
       }

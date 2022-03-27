@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { IRegisterButtonProps } from "./BoardWrite.types";
 
 // 페이지 전체 감싸주는 태그
 export const Wrap = styled.div`
@@ -309,7 +310,8 @@ export const RegisterButton = styled.button`
 
   color: #4f4f4f;
   border: 1px solid #bdbdbd;
-  background-color: ${(props) => (props.isActive ? "#ffd600" : "#BDBDBD;")};
+  background-color: ${(props: IRegisterButtonProps) =>
+    props.isActive ? "#ffd600" : "#BDBDBD;"};
   cursor: pointer;
   /* :hover {
     background-color: #ffd600;
