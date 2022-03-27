@@ -13,8 +13,6 @@ export const InWrap = styled.div`
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 `;
 
-export const OutWrap = styled.div``;
-
 // 상단 페이지 감싸주는 태그
 export const HeaderWrap = styled.div`
   width: 100%;
@@ -255,6 +253,8 @@ export const RightNumber = styled.div`
   text-align: center;
 `;
 
+export const OutWrap = styled.div``;
+
 export const ButtonWarp = styled.div`
   width: 100%;
 
@@ -273,11 +273,260 @@ export const Button = styled.button`
   color: #828282;
   border: 1px solid #bdbdbd;
 
-  margin: 80px 12px 0px 12px;
+  margin: 80px 12px 80px 12px;
 
   cursor: pointer;
   :hover {
     background-color: #ffd600;
     color: #000000;
   }
+`;
+
+// 댓글 부분 시작
+export const CommentsWrap = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* border-top: 1px solid #bdbdbd;
+  border-bottom: 1px solid #bdbdbd; */
+
+  padding-top: 40px;
+  padding-bottom: 20px;
+
+  border-top: 1px solid #bdbdbd; ;
+`;
+
+export const WriterWrap = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding-bottom: 40px;
+`;
+
+export const WriterIcon = styled.img`
+  width: 20px;
+  height: 20px;
+
+  margin-right: 14px;
+`;
+
+export const Writer = styled.div`
+  width: 100%;
+
+  font-weight: 500;
+  font-size: 18px;
+`;
+
+// 댓글 작성자, 패스워드, 레이팅
+export const WriterInputWrap = styled.div`
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: row;
+  align-items: center;
+
+  padding-bottom: 20px;
+`;
+
+export const WriterInput = styled.input`
+  width: 180px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  color: #828282;
+  padding-left: 20px;
+  margin-right: 24px;
+`;
+
+export const PasswordInput = styled.input`
+  width: 180px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  color: #828282;
+  padding-left: 20px;
+  margin-right: 24px;
+`;
+
+export const Rating = styled.img`
+  width: 20px;
+  height: 20px;
+
+  margin: 0px 2px 0px 2px;
+`;
+
+export const ContentsInputWrap = styled.div`
+  width: 100%;
+  height: 161px;
+
+  /* background-color: blue; */
+  border: 1px solid #bdbdbd;
+  display: flex;
+
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
+export const InputUpWrap = styled.textarea`
+  width: 100%;
+  height: 108px;
+  padding: 20px;
+
+  font-weight: 500;
+  font-size: 16px;
+  color: #bdbdbd;
+
+  border: none;
+`;
+
+// 코멘트 작성 아래쪽
+
+export const InputDownWrap = styled.div`
+  width: 100%;
+  height: 52px;
+
+  border-top: 1px solid #f2f2f2;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ContentsNumber = styled.div`
+  width: 100%;
+
+  margin: 14px 20px 14px 20px;
+
+  color: #bdbdbd;
+`;
+
+export const ContentsButton = styled.button`
+  width: 91px;
+  height: 52px;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  background: #000000;
+  color: #ffffff;
+`;
+
+// export const EditerInputWrap = styled.div`
+//   width: 100%;
+// `;
+
+// export const EditContentsInputWrap = styled.div`
+//   width: 100%;
+// `;
+
+export const ListWrap = styled.div`
+  width: 100%;
+  padding-top: 20px;
+
+  border-bottom: 1px solid #bdbdbd;
+  /* 
+  background-color: yellow; */
+`;
+
+export const ListUpWrap = styled.div`
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: row;
+
+  margin-bottom: 20px;
+`;
+
+// 리스트 유저 사진
+export const ListUpLeft = styled.img`
+  width: 40px;
+  height: 40px;
+
+  margin-right: 16px;
+`;
+
+// 리스트 업 오른쪽 부분
+export const ListUpRight = styled.div`
+  width: 100%;
+  /* background-color: green; */
+`;
+
+export const RightUpWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  align-items: center;
+`;
+
+export const UpWrapLeft = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const UpWrapRight = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+export const CommentEditIcon = styled.img`
+  width: 18px;
+  height: 18px;
+  margin-right: 16px;
+`;
+export const CommentCancelIcon = styled.img`
+  width: 14px;
+  height: 14px;
+
+  margin-right: 5px;
+`;
+
+export const RightUpName = styled.div`
+  /* width: 100%; */
+
+  font-weight: 500;
+  font-size: 16px;
+
+  color: #000000;
+
+  margin-right: 16px;
+  margin-bottom: 4px;
+`;
+
+export const RightDownWrap = styled.div`
+  width: 100%;
+`;
+
+export const RightDownContents = styled.div`
+  width: 100%;
+
+  font-weight: 400;
+  font-size: 16px;
+  color: #4f4f4f;
+
+  margin-bottom: 20px;
+`;
+
+export const RightDownDownDate = styled.div`
+  width: 100%;
+  font-weight: 400;
+  font-size: 12px;
+
+  color: #bdbdbd;
 `;
