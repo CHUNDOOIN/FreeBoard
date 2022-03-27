@@ -361,6 +361,19 @@ export const PasswordInput = styled.input`
   margin-right: 24px;
 `;
 
+export const RatingInput = styled.input`
+  width: 180px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+
+  font-weight: 500;
+  font-size: 16px;
+
+  color: #828282;
+  padding-left: 20px;
+  margin-right: 24px;
+`;
+
 export const Rating = styled.img`
   width: 20px;
   height: 20px;

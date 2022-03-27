@@ -73,24 +73,39 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
         </S.WriterWrap>
 
         <S.WriterInputWrap>
-          <S.WriterInput type="text" placeholder="작성자"></S.WriterInput>
+          <S.WriterInput
+            onChange={props.onChangeWriter}
+            type="text"
+            placeholder="작성자"
+          ></S.WriterInput>
           <S.PasswordInput
+            onChange={props.onChangePassword}
             type="password"
             placeholder="비밀번호"
           ></S.PasswordInput>
+          <S.RatingInput
+            onChange={props.onChangeRating}
+            type="text"
+            placeholder="별점"
+          ></S.RatingInput>
+          {/* <S.Rating src="/detail_boards/star.png"></S.Rating>
           <S.Rating src="/detail_boards/star.png"></S.Rating>
           <S.Rating src="/detail_boards/star.png"></S.Rating>
           <S.Rating src="/detail_boards/star.png"></S.Rating>
-          <S.Rating src="/detail_boards/star.png"></S.Rating>
-          <S.Rating src="/detail_boards/star.png"></S.Rating>
+          <S.Rating src="/detail_boards/star.png"></S.Rating> */}
         </S.WriterInputWrap>
 
         <S.ContentsInputWrap>
-          <S.InputUpWrap placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."></S.InputUpWrap>
+          <S.InputUpWrap
+            onChange={props.onChangeContents}
+            placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+          ></S.InputUpWrap>
 
           <S.InputDownWrap>
             <S.ContentsNumber>0/100</S.ContentsNumber>
-            <S.ContentsButton>등록하기</S.ContentsButton>
+            <S.ContentsButton onClick={props.onClickComment}>
+              등록하기
+            </S.ContentsButton>
           </S.InputDownWrap>
         </S.ContentsInputWrap>
 
@@ -98,37 +113,39 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
 
         <S.EditContentsInputWrap></S.EditContentsInputWrap> */}
 
-        <S.ListWrap>
-          <S.ListUpWrap>
-            <S.ListUpLeft src="/detail_boards/user.png"></S.ListUpLeft>
+        {props.data2?.fetchBoardComments.map((el: any) => (
+          <S.ListWrap key={el._id}>
+            <S.ListUpWrap>
+              <S.ListUpLeft src="/detail_boards/user.png"></S.ListUpLeft>
 
-            <S.ListUpRight>
-              <S.RightUpWrap>
-                <S.UpWrapLeft>
-                  {" "}
-                  <S.RightUpName>작성자</S.RightUpName>
-                  <S.Rating src="/detail_boards/star.png"></S.Rating>
-                  <S.Rating src="/detail_boards/star.png"></S.Rating>
-                  <S.Rating src="/detail_boards/star.png"></S.Rating>
-                  <S.Rating src="/detail_boards/star.png"></S.Rating>
-                  <S.Rating src="/detail_boards/star.png"></S.Rating>
-                </S.UpWrapLeft>
+              <S.ListUpRight>
+                <S.RightUpWrap>
+                  <S.UpWrapLeft>
+                    {" "}
+                    <S.RightUpName>{el.writer}</S.RightUpName>
+                    <S.Rating src="/detail_boards/star.png"></S.Rating>
+                    <S.Rating src="/detail_boards/star.png"></S.Rating>
+                    <S.Rating src="/detail_boards/star.png"></S.Rating>
+                    <S.Rating src="/detail_boards/star.png"></S.Rating>
+                    <S.Rating src="/detail_boards/star.png"></S.Rating>
+                  </S.UpWrapLeft>
 
-                <S.UpWrapRight>
-                  <S.CommentEditIcon src="/detail_boards/edit.png"></S.CommentEditIcon>
-                  <S.CommentCancelIcon src="/detail_boards/cancel.png"></S.CommentCancelIcon>{" "}
-                </S.UpWrapRight>
-              </S.RightUpWrap>
+                  <S.UpWrapRight>
+                    <S.CommentEditIcon src="/detail_boards/edit.png"></S.CommentEditIcon>
+                    <S.CommentCancelIcon src="/detail_boards/cancel.png"></S.CommentCancelIcon>{" "}
+                  </S.UpWrapRight>
+                </S.RightUpWrap>
 
-              <S.RightDownWrap>
-                <S.RightDownContents>
-                  가나다라마바사아자차카타파하~가나다라마바사아자차카타파하~가나다라마바사아자차카타파하~가나다라마바사아자차카타파하~가나다라마바사아자차카타파하~
-                </S.RightDownContents>
-                <S.RightDownDownDate>2021.02.22</S.RightDownDownDate>
-              </S.RightDownWrap>
-            </S.ListUpRight>
-          </S.ListUpWrap>
-        </S.ListWrap>
+                <S.RightDownWrap>
+                  <S.RightDownContents>{el.contents} </S.RightDownContents>
+                  <S.RightDownDownDate>
+                    {el.createdAt.slice(0, 10)}
+                  </S.RightDownDownDate>
+                </S.RightDownWrap>
+              </S.ListUpRight>
+            </S.ListUpWrap>
+          </S.ListWrap>
+        ))}
       </S.CommentsWrap>
     </S.Wrap>
   );
