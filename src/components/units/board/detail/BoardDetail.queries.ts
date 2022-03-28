@@ -70,3 +70,42 @@ export const FETCH_BOARD_COMMENTS = gql`
     }
   }
 `;
+
+export const UPDATE_BOARD_COMMENT = gql`
+  mutation updateBoardComment(
+    $updateBoardCommentInput: UpdateBoardCommentInput!
+    $password: String
+    $boardCommentId: ID!
+  ) {
+    updateBoardComment(
+      updateBoardCommentInput: $updateBoardCommentInput
+      password: $password
+      boardCommentId: $boardCommentId
+    ) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const DELETE_BOARD_COMMENT = gql`
+  mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
+    deleteBoardComment(boardCommentId: $boardCommentId, password: $password)
+  }
+`;
+
+export const LIKE_BOARD = gql`
+  mutation likeBoard($boardId: ID!) {
+    likeBoard(boardId: $boardId)
+  }
+`;
+
+export const DISLIKE_BOARD = gql`
+  mutation dislikeBoard($boardId: ID!) {
+    dislikeBoard(boardId: $boardId)
+  }
+`;

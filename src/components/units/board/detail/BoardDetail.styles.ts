@@ -211,6 +211,7 @@ export const BottomLeft = styled.div`
 export const LeftUp = styled.img`
   width: 20px;
   height: 18px;
+  cursor: pointer;
 `;
 
 export const LeftNumber = styled.div`
@@ -240,6 +241,7 @@ export const BottomRight = styled.div`
 export const RightDown = styled.img`
   width: 20px;
   height: 18px;
+  cursor: pointer;
 `;
 
 export const RightNumber = styled.div`
@@ -321,6 +323,14 @@ export const Writer = styled.div`
 
   font-weight: 500;
   font-size: 18px;
+`;
+
+export const WriterCommentWrap = styled.div`
+  width: 100%;
+`;
+
+export const EditCommentWrap = styled.div`
+  width: 100%;
 `;
 
 // 댓글 작성자, 패스워드, 레이팅
@@ -428,6 +438,36 @@ export const ContentsNumber = styled.div`
 `;
 
 export const ContentsButton = styled.button`
+  width: 91px;
+  height: 52px;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  background: #000000;
+  color: #ffffff;
+`;
+
+export const InputDownEditWrap = styled.div`
+  width: 100%;
+  height: 52px;
+
+  border-top: 1px solid #f2f2f2;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ContentsEditNumber = styled.div`
+  width: 100%;
+
+  margin: 14px 20px 14px 20px;
+
+  color: #bdbdbd;
+`;
+
+export const ContentsEditButton = styled.button`
   width: 91px;
   height: 52px;
   font-weight: 500;

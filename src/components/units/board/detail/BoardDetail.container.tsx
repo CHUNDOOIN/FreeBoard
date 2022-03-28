@@ -6,31 +6,47 @@ import {
   DELETE_BOARD,
   FETCH_BOARD_COMMENTS,
   CREATE_BOARD_COMMENT,
+  UPDATE_BOARD_COMMENT,
+  DELETE_BOARD_COMMENT,
+  LIKE_BOARD,
+  DISLIKE_BOARD,
 } from "./BoardDetail.queries";
 import { ChangeEvent, MouseEvent, useState } from "react";
 
 export default function BoardDetail() {
   const router = useRouter();
 
+  const [value, setValue] = useState(5);
+  const handleChange = (value: number) => {
+    setValue(value);
+  };
+
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState("");
 
-  const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
-  const [deleteBoard] = useMutation(DELETE_BOARD);
+  const [likeBoard] = useMutation(LIKE_BOARD);
+  const [dislikeBoard] = useMutation(DISLIKE_BOARD);
 
-  // console.log("이건 라우터", router);
+  const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+
+  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
+
+  const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
+  // 수정 필요.. Pick 쪽?
+  const [deleteBoard] = useMutation(DELETE_BOARD);
+  console.log("이건 라우터", router);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: String(router.query.boardId) },
   });
-  // console.log("이건 데이타", data);
+  console.log("이건 데이타", data);
 
   const { data: data2 } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: { boardId: String(router.query.boardId) },
   });
-  // console.log("이건 데이타2", data2);
+  console.log("이건 데이타2", data2);
 
   const onClickMoveList = () => {
     router.push("/boards");
@@ -71,11 +87,11 @@ export default function BoardDetail() {
             writer: writer,
             password: password,
             contents: contents,
-            rating: Number(rating),
+            rating: Number(value),
           },
           boardId: router.query.boardId,
         },
-        refetchQueries: () => [
+        refetchQueries: [
           {
             query: FETCH_BOARD_COMMENTS,
             variables: { boardId: router.query.boardId },
@@ -90,6 +106,62 @@ export default function BoardDetail() {
     }
   };
 
+  const onClickBoardLike = () => {
+    likeBoard({
+      variables: {
+        boardId: router.query.boardId,
+      },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD,
+          variables: { boardId: router.query.boardId },
+        },
+      ],
+    });
+  };
+
+  const onClickBoardDislike = () => {
+    dislikeBoard({
+      variables: {
+        boardId: router.query.boardId,
+      },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD,
+          variables: { boardId: router.query.boardId },
+        },
+      ],
+    });
+  };
+
+  // const onClickEditComment = async (event: MouseEvent<HTMLButtonElement>) => {
+  //   try {
+  //     await updateBoardComment({
+  //       variables: {
+  //         updateBoardCommentInput: {
+  //           contents: contents,
+  //           rating: rating,
+  //         },
+  //         password: password,
+  //         boardCommentId: boardCommentId,
+  //       },
+  //     });
+  //   } catch (error: any) {
+  //     alert(error.message);
+  //   }
+  // };
+
+  // const onClickCommentDelete = (event: MouseEvent<HTMLButtonElement>) => {
+  //   deleteBoardComment({
+  //     variables: {
+  //       deleteBoardComment: {
+  //         boardCommentId: boardCommentId,
+  //         password: password,
+  //       },
+  //     },
+  //   });
+  // };
+
   return (
     <BoardDetailUI
       onClickMoveList={onClickMoveList}
@@ -100,8 +172,20 @@ export default function BoardDetail() {
       onChangeRating={onChangeRating}
       onClickDelete={onClickDelete}
       onClickComment={onClickComment}
+      onClickBoardLike={onClickBoardLike}
+      onClickBoardDislike={onClickBoardDislike}
+      handleChange={handleChange}
+      value={value}
+      // onClickEditComment={onClickEditComment}
+      // onClickEditInput={onClickEditInput}
+      // onClickCommentDelete={onClickCommentDelete}
+      // isEdit={isEdit}
+
       data={data}
       data2={data2}
+      writer={writer}
+      password={password}
+      contents={contents}
     ></BoardDetailUI>
   );
 }

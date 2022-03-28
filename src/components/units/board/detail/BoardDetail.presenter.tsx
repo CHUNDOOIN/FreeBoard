@@ -1,5 +1,7 @@
 import { MouseEvent } from "react";
 import { IBoardDetailUI } from "./BoardDetail.types";
+import { Rate } from "antd";
+
 import * as S from "./BoardDetail.styles";
 
 export default function BoardDetailUI(props: IBoardDetailUI) {
@@ -43,11 +45,17 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
 
         <S.BottomWrap>
           <S.BottomLeft>
-            <S.LeftUp src={"/detail_boards/up.png"}></S.LeftUp>
+            <S.LeftUp
+              onClick={props.onClickBoardLike}
+              src={"/detail_boards/up.png"}
+            ></S.LeftUp>
             <S.LeftNumber>{props.data?.fetchBoard.likeCount}</S.LeftNumber>
           </S.BottomLeft>
           <S.BottomRight>
-            <S.RightDown src={"/detail_boards/down.png"}></S.RightDown>
+            <S.RightDown
+              onClick={props.onClickBoardDislike}
+              src={"/detail_boards/down.png"}
+            ></S.RightDown>
             <S.RightNumber>{props.data?.fetchBoard.dislikeCount}</S.RightNumber>
           </S.BottomRight>
         </S.BottomWrap>
@@ -72,46 +80,68 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
           <S.Writer>댓글</S.Writer>
         </S.WriterWrap>
 
-        <S.WriterInputWrap>
-          <S.WriterInput
-            onChange={props.onChangeWriter}
-            type="text"
-            placeholder="작성자"
-          ></S.WriterInput>
-          <S.PasswordInput
-            onChange={props.onChangePassword}
-            type="password"
-            placeholder="비밀번호"
-          ></S.PasswordInput>
-          <S.RatingInput
-            onChange={props.onChangeRating}
-            type="text"
-            placeholder="별점"
-          ></S.RatingInput>
-          {/* <S.Rating src="/detail_boards/star.png"></S.Rating>
-          <S.Rating src="/detail_boards/star.png"></S.Rating>
-          <S.Rating src="/detail_boards/star.png"></S.Rating>
-          <S.Rating src="/detail_boards/star.png"></S.Rating>
-          <S.Rating src="/detail_boards/star.png"></S.Rating> */}
-        </S.WriterInputWrap>
+        {/* 코멘드 댓글 작성 */}
+        <S.WriterCommentWrap>
+          <S.WriterInputWrap>
+            <S.WriterInput
+              onChange={props.onChangeWriter}
+              type="text"
+              placeholder="작성자"
+            ></S.WriterInput>
+            <S.PasswordInput
+              onChange={props.onChangePassword}
+              type="password"
+              placeholder="비밀번호"
+            ></S.PasswordInput>
+            <Rate onChange={props.handleChange} value={props.value}></Rate>
+          </S.WriterInputWrap>
 
-        <S.ContentsInputWrap>
-          <S.InputUpWrap
-            onChange={props.onChangeContents}
-            placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
-          ></S.InputUpWrap>
+          <S.ContentsInputWrap>
+            <S.InputUpWrap
+              maxLength={100}
+              onChange={props.onChangeContents}
+              placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+            ></S.InputUpWrap>
 
-          <S.InputDownWrap>
-            <S.ContentsNumber>0/100</S.ContentsNumber>
-            <S.ContentsButton onClick={props.onClickComment}>
-              등록하기
-            </S.ContentsButton>
-          </S.InputDownWrap>
-        </S.ContentsInputWrap>
+            <S.InputDownWrap>
+              <S.ContentsNumber>{props.contents.length}/100</S.ContentsNumber>
+              <S.ContentsButton onClick={props.onClickComment}>
+                등록하기
+              </S.ContentsButton>
+            </S.InputDownWrap>
+          </S.ContentsInputWrap>
+        </S.WriterCommentWrap>
 
-        {/* <S.EditerInputWrap></S.EditerInputWrap>
+        {/* 코멘트 댓글 수정 */}
+        {/* <S.EditCommentWrap>
+          <S.WriterInputWrap>
+            <S.WriterInput
+              onChange={props.onChangeWriter}
+              type="text"
+              placeholder="작성자"
+            ></S.WriterInput>
+            <S.PasswordInput
+              onChange={props.onChangePassword}
+              type="password"
+              placeholder="비밀번호"
+            ></S.PasswordInput>
+            <Rate onChange={props.handleChange} value={props.value}></Rate>
+          </S.WriterInputWrap>
+          <S.ContentsInputWrap>
+            <S.InputUpWrap
+              maxLength={100}
+              onChange={props.onChangeContents}
+              placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+            ></S.InputUpWrap>
 
-        <S.EditContentsInputWrap></S.EditContentsInputWrap> */}
+            <S.InputDownEditWrap>
+              <S.ContentsEditNumber>
+                {props.contents.length}/100
+              </S.ContentsEditNumber>
+              <S.ContentsEditButton>수정하기</S.ContentsEditButton>
+            </S.InputDownEditWrap>
+          </S.ContentsInputWrap>
+        </S.EditCommentWrap> */}
 
         {props.data2?.fetchBoardComments.map((el: any) => (
           <S.ListWrap key={el._id}>
@@ -123,16 +153,18 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
                   <S.UpWrapLeft>
                     {" "}
                     <S.RightUpName>{el.writer}</S.RightUpName>
-                    <S.Rating src="/detail_boards/star.png"></S.Rating>
-                    <S.Rating src="/detail_boards/star.png"></S.Rating>
-                    <S.Rating src="/detail_boards/star.png"></S.Rating>
-                    <S.Rating src="/detail_boards/star.png"></S.Rating>
-                    <S.Rating src="/detail_boards/star.png"></S.Rating>
+                    <Rate value={el.rating}></Rate>
                   </S.UpWrapLeft>
 
                   <S.UpWrapRight>
-                    <S.CommentEditIcon src="/detail_boards/edit.png"></S.CommentEditIcon>
-                    <S.CommentCancelIcon src="/detail_boards/cancel.png"></S.CommentCancelIcon>{" "}
+                    <S.CommentEditIcon
+                      // onClickEditInput={props.onClickEditInput}
+                      src="/detail_boards/edit.png"
+                    ></S.CommentEditIcon>
+                    <S.CommentCancelIcon
+                      // onClickCommentDelete={props.onClickCommentDelete}
+                      src="/detail_boards/cancel.png"
+                    ></S.CommentCancelIcon>{" "}
                   </S.UpWrapRight>
                 </S.RightUpWrap>
 
