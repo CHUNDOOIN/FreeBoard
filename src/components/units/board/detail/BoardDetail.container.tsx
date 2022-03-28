@@ -20,18 +20,17 @@ export default function BoardDetail() {
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
-  console.log("이건 라우터", router);
-  // 자바스크립트 작성
+  // console.log("이건 라우터", router);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: String(router.query.boardId) },
   });
-  console.log("이건 데이타", data);
+  // console.log("이건 데이타", data);
 
   const { data: data2 } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: { boardId: String(router.query.boardId) },
   });
-  console.log("이건 데이타2", data2);
+  // console.log("이건 데이타2", data2);
 
   const onClickMoveList = () => {
     router.push("/boards");
@@ -76,6 +75,12 @@ export default function BoardDetail() {
           },
           boardId: router.query.boardId,
         },
+        refetchQueries: () => [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: router.query.boardId },
+          },
+        ],
       });
 
       alert("댓글 등록 성공 하였습니다!");
