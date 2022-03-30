@@ -33,6 +33,12 @@ export const UPDATE_BOARD = gql`
       writer
       contents
       _id
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
@@ -44,6 +50,12 @@ export const FETCH_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;

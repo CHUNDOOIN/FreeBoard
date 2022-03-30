@@ -12,6 +12,7 @@ import {
   DISLIKE_BOARD,
 } from "./BoardDetail.queries";
 import { ChangeEvent, MouseEvent, useState } from "react";
+import { Modal } from "antd";
 
 export default function BoardDetail() {
   const router = useRouter();
@@ -60,7 +61,9 @@ export default function BoardDetail() {
     deleteBoard({
       variables: { boardId: router.query.boardId },
     });
-    alert("게시물 삭제!");
+    Modal.success({
+      content: "게시물 삭제!",
+    });
     router.push("/boards");
   };
 
@@ -98,11 +101,13 @@ export default function BoardDetail() {
           },
         ],
       });
-
-      alert("댓글 등록 성공 하였습니다!");
+      Modal.success({
+        content: "댓글 등록 성공 하였습니다!",
+      });
     } catch (error: any) {
-      alert(error.message);
-      alert("댓글 등록 실패 하였습니다!");
+      Modal.error({
+        content: "게시물 등록 실패!",
+      });
     }
   };
 

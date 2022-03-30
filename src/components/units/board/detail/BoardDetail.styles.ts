@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import ReactPlayer from "react-player";
 
 // 페이지 전체 감싸주는 태그
 export const Wrap = styled.div`
@@ -175,9 +176,11 @@ export const YoutubeWrap = styled.div`
 `;
 
 // 유튜브 페이지 감싸주는 태그
-export const Youtube = styled.img`
-  width: 526px;
-  height: 280px;
+export const Youtube = styled(ReactPlayer)`
+  width: 486px;
+  height: 240px;
+
+  margin: auto;
 
   /* background-color: red; */
 `;

@@ -1,6 +1,8 @@
 import { ChangeEvent } from "react";
 import * as S from "./BoardWrite.styles";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
@@ -55,18 +57,52 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
       <S.AddressWrap>
         <S.AddressTitle>주소</S.AddressTitle>
         <S.ZipCodeWrap>
-          <S.ZipCode placeholder="14338"></S.ZipCode>
-          <S.ZipCodeSearch>우편번호 검색</S.ZipCodeSearch>
+          <S.ZipCode
+            onChange={props.onChangeZipCode}
+            placeholder={props.data?.fetchBoard?.boardAddress?.zipcode}
+            defaultValue={props.data?.fetchBoard?.boardAddress?.zipcode}
+            // readOnly
+            // value={props.zipcode}
+            // value={props.zipcode}
+            // defaultValue={props.data?.fetchBoard.boardAddress.zipcode}
+          ></S.ZipCode>
+          <S.ZipCodeSearch onClick={props.onClickZipCode}>
+            우편번호 검색{" "}
+            {props.isOpen && (
+              <Modal
+                title="Basic Modal"
+                visible={true}
+                onOk={props.onClickZipCode}
+                onCancel={props.onClickZipCode}
+              >
+                <DaumPostcode onComplete={props.onComplete} />
+              </Modal>
+            )}
+          </S.ZipCodeSearch>
         </S.ZipCodeWrap>
-        <S.AddressInput1></S.AddressInput1>
-        <S.AddressInput2></S.AddressInput2>
+        <S.AddressInput1
+          // onChange={props.onChangeAddress}
+          // value={props.address}
+          // defaultValue={props.data?.fetchBoard.boardAddress.address}
+
+          defaultValue={props.data?.fetchBoard?.boardAddress?.address}
+          placeholder={props.data?.fetchBoard?.boardAddress?.address}
+          // readOnly
+          // value={props.address}
+        ></S.AddressInput1>
+        <S.AddressInput2
+          onChange={props.onChangeAddressDetail}
+          defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
+        ></S.AddressInput2>
       </S.AddressWrap>
 
       <S.YoutubeWrap>
         <S.YoutubeWrapTitle>유튜브</S.YoutubeWrapTitle>
         <S.YoutubeWrapInput
+          onChange={props.onChangeYoutube}
           type="text"
           placeholder="링크를 복사해주세요."
+          defaultValue={props.data?.fetchBoard.youtubeUrl}
         ></S.YoutubeWrapInput>
       </S.YoutubeWrap>
 

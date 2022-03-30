@@ -7,7 +7,7 @@ import { useQuery } from "@apollo/client";
 export default function BoardEditPage() {
   const router = useRouter();
   const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: router.query.boardId },
+    variables: { boardId: String(router.query.boardId) },
   });
 
   return <BoardWrite isEdit={true} data={data}></BoardWrite>;

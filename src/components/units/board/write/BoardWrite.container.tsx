@@ -1,18 +1,29 @@
 import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/router";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation, gql, useQuery } from "@apollo/client";
 import BoardWriteUI from "./BoardWrite.presenter";
-import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.types";
+import { CREATE_BOARD, FETCH_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import {
+  IBoardAddress,
+  IBoardWriteProps,
+  IUpdateBoardInput,
+} from "./BoardWrite.types";
+import { Modal } from "antd";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const [isActive, setIsActive] = useState(false);
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+
+  const [zipcode, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -21,7 +32,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
-  const [data, setData] = useState();
+  const [data, setData] = useState("");
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
@@ -73,26 +84,37 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   const onClickEdit = async () => {
     const updateBoardInput: IUpdateBoardInput = {};
-    console.log("수정버튼");
-    if (title !== "") {
-      updateBoardInput.title = title;
-    }
-    if (contents !== "") {
-      updateBoardInput.contents = contents;
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+    if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address) updateBoardInput.boardAddress.address = address;
+      if (addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
     }
 
     try {
       await updateBoard({
         variables: {
           updateBoardInput: updateBoardInput,
+
           boardId: router.query.boardId,
           password: password,
         },
       });
-      alert("게시글을 수정 하였습니다!");
+      Modal.success({
+        title: "게시글 수정 성공",
+        content: "게시글을 수정 성공하였습니다.",
+      });
       router.push(`/boards/${router.query.boardId}`);
     } catch (error: any) {
-      alert(error.message);
+      Modal.error({
+        title: "게시글 수정 실패",
+        content: `실패내용 : ${error.message}`,
+      });
+      // alert(error.message);
       console.log(error);
     }
   };
@@ -119,19 +141,62 @@ export default function BoardWrite(props: IBoardWriteProps) {
               password: password,
               title: title,
               contents: contents,
+              youtubeUrl: String(youtubeUrl),
+              boardAddress: {
+                zipcode: zipcode,
+                address: address,
+                addressDetail: addressDetail,
+              },
             },
           },
         });
         // console.log(result.data.createBoard._id);
-        alert("게시글을 등록 하였습니다!");
+
+        Modal.success({
+          title: "게시글 등록 성공",
+          content: "게시글을 등록 하였습니다!",
+        });
+        // alert("게시글을 등록 하였습니다!");
         router.push(`/boards/${result.data.createBoard._id}`);
       } catch (error: any) {
-        alert(error.message);
-        alert("게시글을 등록 실패 하였습니다!");
+        Modal.error({
+          title: "게시글 등록 실패",
+          content: `내용 : ${error.message}`,
+        });
+
+        // alert(error.message);
+        // alert("게시글을 등록 실패 하였습니다!");
       }
     }
     // console.log(result.data);
     // setData(result.data.createBoard.message);
+  };
+
+  const onChangeYoutube = (event: ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value);
+  };
+
+  const onClickZipCode = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleComplete = (data2: any) => {
+    console.log("주소 창 닫아졌니?", data2);
+    onClickZipCode();
+    setZipCode(data2.zonecode);
+    setAddress(data2.address);
+  };
+
+  const onChangeZipCode = (event: ChangeEvent<HTMLInputElement>) => {
+    setZipCode(event.target.value);
+  };
+
+  const onChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddress(event.target.value);
+  };
+
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
   };
 
   return (
@@ -140,10 +205,20 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangePassword={onChangePassword}
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
+      onChangeYoutube={onChangeYoutube}
       onClickSubmit={onClickSubmit}
       onClickEdit={onClickEdit} // 수정하기 버튼
+      onClickZipCode={onClickZipCode} // 주소 검색 버튼
+      onChangeZipCode={onChangeZipCode}
+      onChangeAddress={onChangeAddress}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onComplete={handleComplete}
       isActive={isActive}
       isEdit={props.isEdit}
+      isOpen={isOpen}
+      zipcode={zipcode}
+      address={address}
+      addressDetail={addressDetail}
       writerError={writerError}
       passwordError={passwordError}
       titleError={titleError}

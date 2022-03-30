@@ -40,7 +40,11 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
         </S.MainWrap>
 
         <S.YoutubeWrap>
-          <S.Youtube src={"/detail_boards/video.png"}></S.Youtube>
+          <S.Youtube
+            url={props.data?.fetchBoard.youtubeUrl}
+            width="486px"
+            height="240px"
+          ></S.Youtube>
         </S.YoutubeWrap>
 
         <S.BottomWrap>
