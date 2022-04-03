@@ -1,8 +1,8 @@
 import { MouseEvent } from "react";
 import { IBoardDetailUI } from "./BoardDetail.types";
 import { Rate } from "antd";
-
 import * as S from "./BoardDetail.styles";
+import { getDate } from "../../../../commons/libraries/utils";
 
 export default function BoardDetailUI(props: IBoardDetailUI) {
   return (
@@ -14,7 +14,7 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
             <S.LeftWrap>
               <S.LeftTitle>{props.data?.fetchBoard.writer}</S.LeftTitle>
               <S.LeftDate>
-                {props.data?.fetchBoard.updatedAt.slice(0, 10)}
+                {getDate(props.data?.fetchBoard.createdAt)}
               </S.LeftDate>
             </S.LeftWrap>
           </S.HeaderLeft>
@@ -40,11 +40,13 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
         </S.MainWrap>
 
         <S.YoutubeWrap>
-          <S.Youtube
-            url={props.data?.fetchBoard.youtubeUrl}
-            width="486px"
-            height="240px"
-          ></S.Youtube>
+          {props.data?.fetchBoard.youtubeUrl && (
+            <S.Youtube
+              url={props.data?.fetchBoard.youtubeUrl}
+              width="486px"
+              height="240px"
+            />
+          )}
         </S.YoutubeWrap>
 
         <S.BottomWrap>
@@ -70,7 +72,7 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
           <S.Button onClick={props.onClickMoveList}>목록으로</S.Button>
           <S.Button onClick={props.onClickMoveEdit}>수정하기</S.Button>
           <S.Button
-            id={props.data?.fetchBoard.boardId}
+            // id={props.data?.fetchBoard._id}
             onClick={props.onClickDelete}
           >
             삭제하기
@@ -108,7 +110,9 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
             ></S.InputUpWrap>
 
             <S.InputDownWrap>
-              <S.ContentsNumber>{props.contents.length}/100</S.ContentsNumber>
+              <S.ContentsNumber>
+                {props.data?.fetchBoard.contents.length}/100
+              </S.ContentsNumber>
               <S.ContentsButton onClick={props.onClickComment}>
                 등록하기
               </S.ContentsButton>

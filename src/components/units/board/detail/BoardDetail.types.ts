@@ -1,4 +1,5 @@
 import { ChangeEvent, MouseEvent } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 // 프리젠터 타입
 export interface IBoardDetailUI {
@@ -14,10 +15,6 @@ export interface IBoardDetailUI {
     event: MouseEvent<HTMLImageElement, globalThis.MouseEvent>
   ) => void;
 
-  // onClickEditComment: (event: MouseEvent<HTMLButtonElement>) => void;
-  // onClickEditInput: (event: MouseEvent<HTMLButtonElement>) => void;
-  // onClickCommentDelete: (event: MouseEvent<HTMLButtonElement>) => void;
-
   onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -25,12 +22,8 @@ export interface IBoardDetailUI {
 
   handleChange: any;
 
-  data?: any;
-  data2?: any;
+  data?: Pick<IQuery, "fetchBoard">;
+  data2?: Pick<IQuery, "fetchBoardComments">;
 
-  value?: number;
-
-  writer?: any;
-  password?: any;
-  contents?: any;
+  value: any;
 }

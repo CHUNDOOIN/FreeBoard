@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/router";
-import { useMutation, gql, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import BoardWriteUI from "./BoardWrite.presenter";
-import { CREATE_BOARD, FETCH_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import {
   IBoardAddress,
   IBoardWriteProps,
@@ -11,8 +11,9 @@ import {
 import { Modal } from "antd";
 
 export default function BoardWrite(props: IBoardWriteProps) {
-  const [isActive, setIsActive] = useState(false);
   const router = useRouter();
+
+  const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const [writer, setWriter] = useState("");

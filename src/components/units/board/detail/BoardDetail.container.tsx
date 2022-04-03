@@ -1,53 +1,85 @@
 import { useRouter } from "next/router";
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import BoardDetailUI from "./BoardDetail.presenter";
 import {
   FETCH_BOARD,
   DELETE_BOARD,
   FETCH_BOARD_COMMENTS,
   CREATE_BOARD_COMMENT,
-  UPDATE_BOARD_COMMENT,
-  DELETE_BOARD_COMMENT,
   LIKE_BOARD,
   DISLIKE_BOARD,
 } from "./BoardDetail.queries";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { Modal } from "antd";
+import {
+  IMutation,
+  IMutationCreateBoardCommentArgs,
+  IMutationDeleteBoardArgs,
+  IMutationDislikeBoardArgs,
+  IMutationLikeBoardArgs,
+  IQuery,
+  IQueryFetchBoardArgs,
+  IQueryFetchBoardCommentsArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function BoardDetail() {
+  // 라우터
   const router = useRouter();
+  console.log("이건 router", router);
 
+  // State 선언
   const [value, setValue] = useState(5);
-  const handleChange = (value: number) => {
-    setValue(value);
-  };
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState("");
 
-  const [likeBoard] = useMutation(LIKE_BOARD);
-  const [dislikeBoard] = useMutation(DISLIKE_BOARD);
+  // API 요청
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: { boardId: String(router.query.boardId) },
+    }
+  );
+  console.log("이건 data", data);
 
-  const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
-
-  const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
-
-  const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
-  // 수정 필요.. Pick 쪽?
-  const [deleteBoard] = useMutation(DELETE_BOARD);
-  console.log("이건 라우터", router);
-
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data: data2 } = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_BOARD_COMMENTS, {
     variables: { boardId: String(router.query.boardId) },
   });
-  console.log("이건 데이타", data);
+  console.log("이건 data2", data2);
 
-  const { data: data2 } = useQuery(FETCH_BOARD_COMMENTS, {
-    variables: { boardId: String(router.query.boardId) },
-  });
-  console.log("이건 데이타2", data2);
+  const [likeBoard] = useMutation<
+    Pick<IMutation, "likeBoard">,
+    IMutationLikeBoardArgs
+  >(LIKE_BOARD);
+
+  const [dislikeBoard] = useMutation<
+    Pick<IMutation, "dislikeBoard">,
+    IMutationDislikeBoardArgs
+  >(DISLIKE_BOARD);
+
+  const [createBoardComment] = useMutation<
+    Pick<IMutation, "createBoardComment">,
+    IMutationCreateBoardCommentArgs
+  >(CREATE_BOARD_COMMENT);
+
+  const [deleteBoard] = useMutation<
+    Pick<IMutation, "deleteBoard">,
+    IMutationDeleteBoardArgs
+  >(DELETE_BOARD);
+
+  // 작성중...
+  // const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+  // const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
+
+  // 함수 부분
+  const handleChange = (value: number) => {
+    setValue(value);
+  };
 
   const onClickMoveList = () => {
     router.push("/boards");
@@ -59,7 +91,7 @@ export default function BoardDetail() {
 
   const onClickDelete = (event: MouseEvent<HTMLButtonElement>) => {
     deleteBoard({
-      variables: { boardId: router.query.boardId },
+      variables: { boardId: String(router.query.boardId) },
     });
     Modal.success({
       content: "게시물 삭제!",
@@ -92,7 +124,7 @@ export default function BoardDetail() {
             contents: contents,
             rating: Number(value),
           },
-          boardId: router.query.boardId,
+          boardId: String(router.query.boardId),
         },
         refetchQueries: [
           {
@@ -114,12 +146,12 @@ export default function BoardDetail() {
   const onClickBoardLike = () => {
     likeBoard({
       variables: {
-        boardId: router.query.boardId,
+        boardId: String(router.query.boardId),
       },
       refetchQueries: [
         {
           query: FETCH_BOARD,
-          variables: { boardId: router.query.boardId },
+          variables: { boardId: String(router.query.boardId) },
         },
       ],
     });
@@ -128,44 +160,16 @@ export default function BoardDetail() {
   const onClickBoardDislike = () => {
     dislikeBoard({
       variables: {
-        boardId: router.query.boardId,
+        boardId: String(router.query.boardId),
       },
       refetchQueries: [
         {
           query: FETCH_BOARD,
-          variables: { boardId: router.query.boardId },
+          variables: { boardId: String(router.query.boardId) },
         },
       ],
     });
   };
-
-  // const onClickEditComment = async (event: MouseEvent<HTMLButtonElement>) => {
-  //   try {
-  //     await updateBoardComment({
-  //       variables: {
-  //         updateBoardCommentInput: {
-  //           contents: contents,
-  //           rating: rating,
-  //         },
-  //         password: password,
-  //         boardCommentId: boardCommentId,
-  //       },
-  //     });
-  //   } catch (error: any) {
-  //     alert(error.message);
-  //   }
-  // };
-
-  // const onClickCommentDelete = (event: MouseEvent<HTMLButtonElement>) => {
-  //   deleteBoardComment({
-  //     variables: {
-  //       deleteBoardComment: {
-  //         boardCommentId: boardCommentId,
-  //         password: password,
-  //       },
-  //     },
-  //   });
-  // };
 
   return (
     <BoardDetailUI
@@ -181,16 +185,13 @@ export default function BoardDetail() {
       onClickBoardDislike={onClickBoardDislike}
       handleChange={handleChange}
       value={value}
-      // onClickEditComment={onClickEditComment}
-      // onClickEditInput={onClickEditInput}
-      // onClickCommentDelete={onClickCommentDelete}
-      // isEdit={isEdit}
-
       data={data}
       data2={data2}
-      writer={writer}
-      password={password}
-      contents={contents}
+      // writer={writer}
+      // password={password}
+      // contents={contents}
+      // boardId={String(router.query.boardId)}
+      // youtubeUrl={data?.fetchBoard.youtubeUrl}
     ></BoardDetailUI>
   );
 }
