@@ -59,8 +59,12 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         <S.ZipCodeWrap>
           <S.ZipCode
             onChange={props.onChangeZipCode}
-            placeholder={props.data?.fetchBoard?.boardAddress?.zipcode}
-            defaultValue={props.data?.fetchBoard?.boardAddress?.zipcode}
+            readOnly
+            value={
+              props.zipcode ||
+              props.data?.fetchBoard.boardAddress?.zipcode ||
+              ""
+            }
             // readOnly
             // value={props.zipcode}
             // value={props.zipcode}
@@ -81,10 +85,10 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
           </S.ZipCodeSearch>
         </S.ZipCodeWrap>
         <S.AddressInput1
-          // onChange={props.onChangeAddress}
-          // value={props.address}
-          // defaultValue={props.data?.fetchBoard.boardAddress.address}
-
+          readOnly
+          value={
+            props.address || props.data?.fetchBoard.boardAddress?.address || ""
+          }
           defaultValue={props.data?.fetchBoard?.boardAddress?.address}
           placeholder={props.data?.fetchBoard?.boardAddress?.address}
           // readOnly
