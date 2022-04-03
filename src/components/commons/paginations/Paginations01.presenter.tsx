@@ -1,24 +1,25 @@
-import { useQuery, gql } from "@apollo/client";
-import styled from "@emotion/styled";
-import { useState } from "react";
+import Paginations01 from "./Paginations01.container";
+import { Page } from "./Paginations01.styles";
+import { Paginations01UIProps } from "./Paginations01.types";
 
-export default function Paginations01UI(props) {
+export default function Paginations01UI(props: Paginations01UIProps) {
   return (
     <div>
-      <span onClick={props.onClickPrevPage}>이전페이지</span>
+      <Page onClick={props.onClickPrevPage}>이전페이지</Page>
       {new Array(10).fill(1).map(
         (_, index) =>
           index + props.startPage <= props.lastPage && (
-            <span
+            <Page
               key={index + props.startPage}
               onClick={props.onClickPage}
               id={String(index + props.startPage)}
             >
               {` `} {index + props.startPage}
-            </span>
+            </Page>
           )
       )}
-      <span onClick={props.onClickNextPage}>다음페이지</span>
+      {` `}
+      <Page onClick={props.onClickNextPage}>다음페이지</Page>
     </div>
   );
 }

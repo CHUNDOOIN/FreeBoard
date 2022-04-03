@@ -1,9 +1,14 @@
 import styled from "@emotion/styled";
 
-const MyRow = styled.div`
+export const MyRow = styled.div`
   display: flex;
 `;
 
-const MyColumn = styled.div`
+export const MyColumn = styled.div`
   /* width: 25%; */
+`;
+
+export const Page = styled.span`
+  font-size: 20px;
+  cursor: pointer;
 `;

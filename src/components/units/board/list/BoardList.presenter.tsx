@@ -28,7 +28,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
 
       <S.TableBottom />
       <S.Footer>
-        <Paginations01></Paginations01>
+        <Paginations01 refetch={props.refetch}></Paginations01>
         <S.Button onClick={props.onClickMoveToBoardNew}>
           <S.PencilIcon src="/boardsList/create.png" />
           게시물 등록하기

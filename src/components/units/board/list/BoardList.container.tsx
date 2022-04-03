@@ -14,9 +14,10 @@ export default function BoardList() {
   const router = useRouter();
 
   // API 요청
-  const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
-    FETCH_BOARDS
-  );
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchBoards">,
+    IQueryFetchBoardsArgs
+  >(FETCH_BOARDS);
   console.log("이건 data2?", data);
 
   const { data: data2 } = useQuery<
@@ -41,6 +42,7 @@ export default function BoardList() {
     <BoardListUI
       onClickMoveToBoardDetail={onClickMoveToBoardDetail}
       onClickMoveToBoardNew={onClickMoveToBoardNew}
+      refetch={refetch}
       data={data}
       data2={data2}
     ></BoardListUI>
