@@ -1,10 +1,11 @@
 import { useQuery, gql } from "@apollo/client";
 import BoardListUI from "./BoardList.presenter";
 import { Router, useRouter } from "next/router";
-import { FETCH_BOARDS } from "./BoardList.queries";
+import { FETCH_BOARDS, FETCH_BOARD_COMMENTS } from "./BoardList.queries";
 import { MouseEvent, MouseEventHandler } from "react";
 import {
   IQuery,
+  IQueryFetchBoardCommentsArgs,
   IQueryFetchBoardsArgs,
 } from "../../../../commons/types/generated/types";
 
@@ -16,7 +17,15 @@ export default function BoardList() {
   const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
     FETCH_BOARDS
   );
-  console.log("데이터 나오니?", data);
+  console.log("이건 data2?", data);
+
+  const { data: data2 } = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_BOARD_COMMENTS, {
+    variables: { boardId: String(router.query.boardId) },
+  });
+  console.log("이건 data2", data2);
 
   // 함수
   const onClickMoveToBoardDetail = (event: MouseEvent<HTMLDivElement>) => {
@@ -33,6 +42,7 @@ export default function BoardList() {
       onClickMoveToBoardDetail={onClickMoveToBoardDetail}
       onClickMoveToBoardNew={onClickMoveToBoardNew}
       data={data}
+      data2={data2}
     ></BoardListUI>
   );
 }

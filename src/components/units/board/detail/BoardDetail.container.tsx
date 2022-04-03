@@ -8,6 +8,7 @@ import {
   CREATE_BOARD_COMMENT,
   LIKE_BOARD,
   DISLIKE_BOARD,
+  DELETE_BOARD_COMMENT,
 } from "./BoardDetail.queries";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { Modal } from "antd";
@@ -15,6 +16,7 @@ import {
   IMutation,
   IMutationCreateBoardCommentArgs,
   IMutationDeleteBoardArgs,
+  IMutationDeleteBoardCommentArgs,
   IMutationDislikeBoardArgs,
   IMutationLikeBoardArgs,
   IQuery,
@@ -34,6 +36,9 @@ export default function BoardDetail() {
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState("");
+  const [deleteId, setDeleteId] = useState("");
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [myPassword, setMyPassword] = useState("");
 
   // API 요청
   const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
@@ -73,7 +78,10 @@ export default function BoardDetail() {
   >(DELETE_BOARD);
 
   // 작성중...
-  // const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
+  const [deleteBoardComment] = useMutation<
+    Pick<IMutation, "deleteBoardComment">,
+    IMutationDeleteBoardCommentArgs
+  >(DELETE_BOARD_COMMENT);
   // const [updateBoardComment] = useMutation(UPDATE_BOARD_COMMENT);
 
   // 함수 부분
@@ -138,7 +146,7 @@ export default function BoardDetail() {
       });
     } catch (error: any) {
       Modal.error({
-        content: "게시물 등록 실패!",
+        content: "댓글 등록 실패!",
       });
     }
   };
@@ -171,6 +179,41 @@ export default function BoardDetail() {
     });
   };
 
+  // 댓글 삭제
+
+  async function onClickCommentDelete() {
+    try {
+      await deleteBoardComment({
+        variables: {
+          password: myPassword,
+          boardCommentId: deleteId,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: router.query.boardId },
+          },
+        ],
+      });
+      Modal.success({
+        content: "댓글 삭제!",
+      });
+      setIsOpenDeleteModal(false);
+      setDeleteId("");
+    } catch (error: any) {
+      Modal.error({ content: error.message });
+    }
+  }
+
+  function onClickOpenDeleteModal(event: MouseEvent<HTMLImageElement>) {
+    setIsOpenDeleteModal(true);
+    if (event.target instanceof Element) setDeleteId(event.target.id);
+  }
+
+  function onChangeDeletePassword(event: ChangeEvent<HTMLInputElement>) {
+    setMyPassword(event.target.value);
+  }
+
   return (
     <BoardDetailUI
       onClickMoveList={onClickMoveList}
@@ -183,15 +226,16 @@ export default function BoardDetail() {
       onClickComment={onClickComment}
       onClickBoardLike={onClickBoardLike}
       onClickBoardDislike={onClickBoardDislike}
+      //
+      onClickCommentDelete={onClickCommentDelete}
+      onClickOpenDeleteModal={onClickOpenDeleteModal}
+      onChangeDeletePassword={onChangeDeletePassword}
+      isOpenDeleteModal={isOpenDeleteModal}
+      //
       handleChange={handleChange}
       value={value}
       data={data}
       data2={data2}
-      // writer={writer}
-      // password={password}
-      // contents={contents}
-      // boardId={String(router.query.boardId)}
-      // youtubeUrl={data?.fetchBoard.youtubeUrl}
     ></BoardDetailUI>
   );
 }

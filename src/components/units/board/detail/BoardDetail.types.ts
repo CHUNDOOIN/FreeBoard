@@ -19,6 +19,16 @@ export interface IBoardDetailUI {
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeRating: (event: ChangeEvent<HTMLInputElement>) => void;
+  //
+
+  isOpenDeleteModal: boolean;
+  onClickOpenDeleteModal: (event: MouseEvent<HTMLImageElement>) => void;
+  onClickCommentDelete: () => void;
+  onChangeDeletePassword: (event: ChangeEvent<HTMLInputElement>) => void;
+
+  // onClickEditInput: (
+  //   event: MouseEvent<HTMLImageElement, globalThis.MouseEvent>
+  // ) => void;
 
   handleChange: any;
 

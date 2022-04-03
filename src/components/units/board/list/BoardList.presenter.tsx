@@ -1,4 +1,5 @@
 import { MouseEvent } from "react";
+import Paginations01 from "../../../commons/paginations/Paginations01.container";
 import * as S from "./BoardList.styles";
 import { IBoardListUIProps } from "./BoardList.types";
 
@@ -27,6 +28,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
 
       <S.TableBottom />
       <S.Footer>
+        <Paginations01></Paginations01>
         <S.Button onClick={props.onClickMoveToBoardNew}>
           <S.PencilIcon src="/boardsList/create.png" />
           게시물 등록하기

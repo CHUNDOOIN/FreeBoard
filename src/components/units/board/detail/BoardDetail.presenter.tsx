@@ -1,12 +1,21 @@
 import { MouseEvent } from "react";
 import { IBoardDetailUI } from "./BoardDetail.types";
-import { Rate } from "antd";
+import { Modal, Rate } from "antd";
 import * as S from "./BoardDetail.styles";
 import { getDate } from "../../../../commons/libraries/utils";
 
 export default function BoardDetailUI(props: IBoardDetailUI) {
   return (
     <S.Wrap>
+      {props.isOpenDeleteModal && (
+        <Modal visible={true} onOk={props.onClickCommentDelete}>
+          <div>비밀번호 입력: </div>
+          <S.PasswordInput
+            type="password"
+            onChange={props.onChangeDeletePassword}
+          />
+        </Modal>
+      )}
       <S.InWrap>
         <S.HeaderWrap>
           <S.HeaderLeft>
@@ -166,12 +175,13 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
 
                   <S.UpWrapRight>
                     <S.CommentEditIcon
-                      // onClickEditInput={props.onClickEditInput}
+                      // onClick={props.onClickEditInput}
                       src="/detail_boards/edit.png"
                     ></S.CommentEditIcon>
                     <S.CommentCancelIcon
-                      // onClickCommentDelete={props.onClickCommentDelete}
+                      onClick={props.onClickOpenDeleteModal}
                       src="/detail_boards/cancel.png"
+                      id={el._id}
                     ></S.CommentCancelIcon>{" "}
                   </S.UpWrapRight>
                 </S.RightUpWrap>
@@ -179,7 +189,7 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
                 <S.RightDownWrap>
                   <S.RightDownContents>{el.contents} </S.RightDownContents>
                   <S.RightDownDownDate>
-                    {el.createdAt.slice(0, 10)}
+                    {getDate(el.createdAt)}
                   </S.RightDownDownDate>
                 </S.RightDownWrap>
               </S.ListUpRight>

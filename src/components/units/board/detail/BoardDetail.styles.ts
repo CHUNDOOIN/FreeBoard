@@ -544,13 +544,18 @@ export const UpWrapRight = styled.div`
 export const CommentEditIcon = styled.img`
   width: 18px;
   height: 18px;
+
   margin-right: 16px;
+
+  cursor: pointer;
 `;
 export const CommentCancelIcon = styled.img`
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
 
   margin-right: 5px;
+
+  cursor: pointer;
 `;
 
 export const RightUpName = styled.div`
