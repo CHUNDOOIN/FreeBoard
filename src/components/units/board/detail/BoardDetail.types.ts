@@ -36,4 +36,9 @@ export interface IBoardDetailUI {
   data2?: Pick<IQuery, "fetchBoardComments">;
 
   value: any;
+
+  pageStart: any;
+  onLoadMore: () => void;
+  hasMore: boolean;
+  useWindow: boolean;
 }

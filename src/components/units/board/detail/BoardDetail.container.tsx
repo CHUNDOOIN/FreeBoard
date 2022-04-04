@@ -9,6 +9,8 @@ import {
   LIKE_BOARD,
   DISLIKE_BOARD,
   DELETE_BOARD_COMMENT,
+  FETCH_BOARDS_COUNT,
+  FETCH_BOARDS,
 } from "./BoardDetail.queries";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { Modal } from "antd";
@@ -22,6 +24,8 @@ import {
   IQuery,
   IQueryFetchBoardArgs,
   IQueryFetchBoardCommentsArgs,
+  IQueryFetchBoardsArgs,
+  IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
 
 export default function BoardDetail() {
@@ -49,13 +53,46 @@ export default function BoardDetail() {
   );
   console.log("이건 data", data);
 
-  const { data: data2 } = useQuery<
+  const { data: data2, fetchMore } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
     variables: { boardId: String(router.query.boardId) },
   });
   console.log("이건 data2", data2);
+
+  // const { data: data3 } = useQuery<
+  //   Pick<IQuery, "fetchBoardsCount">,
+  //   IQueryFetchBoardsCountArgs
+  // >(FETCH_BOARDS_COUNT);
+  // console.log("이건 data3", data3);
+
+  // const { data: data4 } = useQuery<
+  //   Pick<IQuery, "fetchBoards">,
+  //   IQueryFetchBoardsArgs
+  // >(FETCH_BOARDS);
+  // console.log("이건 data4", data4);
+
+  // 함수
+  const onLoadMore = () => {
+    // 데이터 값이 없으면 리턴해
+    if (!data2) return;
+
+    //현재 페이지보다 +1페이지를 더 추가로 가져와
+    fetchMore({
+      variables: { page: Math.ceil(data2.fetchBoardComments.length / 10) + 1 },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchBoardComments)
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult?.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
 
   const [likeBoard] = useMutation<
     Pick<IMutation, "likeBoard">,
@@ -236,6 +273,11 @@ export default function BoardDetail() {
       value={value}
       data={data}
       data2={data2}
+      //
+      pageStart={0}
+      onLoadMore={onLoadMore}
+      hasMore={true}
+      useWindow={false}
     ></BoardDetailUI>
   );
 }

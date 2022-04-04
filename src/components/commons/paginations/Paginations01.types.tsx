@@ -15,6 +15,7 @@ export interface Paginations01UIProps {
   onClickPage: (event: MouseEvent<HTMLSpanElement>) => void;
   onClickPrevPage: () => void;
   onClickNextPage: () => void;
+  nowPage: any;
   startPage: any;
   lastPage: any;
   data?: any;

@@ -109,3 +109,22 @@ export const DISLIKE_BOARD = gql`
     dislikeBoard(boardId: $boardId)
   }
 `;
+
+// 게시물 10개씩 보여줌
+export const FETCH_BOARDS = gql`
+  query fetchBoards($page: Int) {
+    fetchBoards(page: $page) {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`;
+
+//총 게시물 몇개?
+export const FETCH_BOARDS_COUNT = gql`
+  query fetchBoardsCount {
+    fetchBoardsCount
+  }
+`;

@@ -10,6 +10,11 @@ export default function Paginations01UI(props: Paginations01UIProps) {
         (_, index) =>
           index + props.startPage <= props.lastPage && (
             <Page
+              style={
+                props.nowPage === Number(index + props.startPage)
+                  ? { color: "red" }
+                  : { color: "black" }
+              }
               key={index + props.startPage}
               onClick={props.onClickPage}
               id={String(index + props.startPage)}

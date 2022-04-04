@@ -3,8 +3,10 @@ import { IBoardDetailUI } from "./BoardDetail.types";
 import { Modal, Rate } from "antd";
 import * as S from "./BoardDetail.styles";
 import { getDate } from "../../../../commons/libraries/utils";
+import InfiniteScroll from "react-infinite-scroller";
 
 export default function BoardDetailUI(props: IBoardDetailUI) {
+  if (!props.data2) return <div></div>;
   return (
     <S.Wrap>
       {props.isOpenDeleteModal && (
@@ -94,7 +96,6 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
           <S.WriterIcon src="/detail_boards/comment.png"></S.WriterIcon>
           <S.Writer>댓글</S.Writer>
         </S.WriterWrap>
-
         {/* 코멘드 댓글 작성 */}
         <S.WriterCommentWrap>
           <S.WriterInputWrap>
@@ -128,7 +129,6 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
             </S.InputDownWrap>
           </S.ContentsInputWrap>
         </S.WriterCommentWrap>
-
         {/* 코멘트 댓글 수정 */}
         {/* <S.EditCommentWrap>
           <S.WriterInputWrap>
@@ -159,43 +159,53 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
             </S.InputDownEditWrap>
           </S.ContentsInputWrap>
         </S.EditCommentWrap> */}
+        <S.Scroll>
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={props.onLoadMore}
+            hasMore={true}
+            useWindow={false}
+          >
+            {props.data2?.fetchBoardComments.map((el: any) => (
+              <S.ListWrap key={el._id}>
+                <S.ListUpWrap>
+                  <S.ListUpLeft src="/detail_boards/user.png"></S.ListUpLeft>
 
-        {props.data2?.fetchBoardComments.map((el: any) => (
-          <S.ListWrap key={el._id}>
-            <S.ListUpWrap>
-              <S.ListUpLeft src="/detail_boards/user.png"></S.ListUpLeft>
+                  <S.ListUpRight>
+                    <S.RightUpWrap>
+                      <S.UpWrapLeft>
+                        {" "}
+                        <S.RightUpName>{el.writer}</S.RightUpName>
+                        <Rate value={el.rating}></Rate>
+                      </S.UpWrapLeft>
 
-              <S.ListUpRight>
-                <S.RightUpWrap>
-                  <S.UpWrapLeft>
-                    {" "}
-                    <S.RightUpName>{el.writer}</S.RightUpName>
-                    <Rate value={el.rating}></Rate>
-                  </S.UpWrapLeft>
+                      <S.UpWrapRight>
+                        <S.CommentEditIcon
+                          // onClick={props.onClickEditInput}
+                          src="/detail_boards/edit.png"
+                        ></S.CommentEditIcon>
+                        <S.CommentCancelIcon
+                          onClick={props.onClickOpenDeleteModal}
+                          src="/detail_boards/cancel.png"
+                          id={el._id}
+                        ></S.CommentCancelIcon>{" "}
+                      </S.UpWrapRight>
+                    </S.RightUpWrap>
 
-                  <S.UpWrapRight>
-                    <S.CommentEditIcon
-                      // onClick={props.onClickEditInput}
-                      src="/detail_boards/edit.png"
-                    ></S.CommentEditIcon>
-                    <S.CommentCancelIcon
-                      onClick={props.onClickOpenDeleteModal}
-                      src="/detail_boards/cancel.png"
-                      id={el._id}
-                    ></S.CommentCancelIcon>{" "}
-                  </S.UpWrapRight>
-                </S.RightUpWrap>
+                    <S.RightDownWrap>
+                      <S.RightDownContents>{el.contents} </S.RightDownContents>
+                      <S.RightDownDownDate>
+                        {getDate(el.createdAt)}
+                      </S.RightDownDownDate>
+                    </S.RightDownWrap>
+                  </S.ListUpRight>
+                </S.ListUpWrap>
+              </S.ListWrap>
+            ))}
+          </InfiniteScroll>
+        </S.Scroll>
 
-                <S.RightDownWrap>
-                  <S.RightDownContents>{el.contents} </S.RightDownContents>
-                  <S.RightDownDownDate>
-                    {getDate(el.createdAt)}
-                  </S.RightDownDownDate>
-                </S.RightDownWrap>
-              </S.ListUpRight>
-            </S.ListUpWrap>
-          </S.ListWrap>
-        ))}
+        {/* 댓글 끝 */}
       </S.CommentsWrap>
     </S.Wrap>
   );

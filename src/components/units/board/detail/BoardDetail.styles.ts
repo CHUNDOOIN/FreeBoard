@@ -488,6 +488,16 @@ export const ContentsEditButton = styled.button`
 //   width: 100%;
 // `;
 
+export const Scroll = styled.div`
+  width: 100%;
+  height: 500px;
+
+  overflow: auto;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* justify-content: space-around; */
+`;
+
 export const ListWrap = styled.div`
   width: 100%;
   padding-top: 20px;
