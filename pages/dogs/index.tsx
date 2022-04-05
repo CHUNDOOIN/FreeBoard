@@ -15,7 +15,7 @@ export default function OpenApiPage() {
 
   return (
     <div>
-      <div>멍멍이 사진으로 힐링~ (랜덤으로 1장 보여집니다.)</div>
+      <div>댕댕이 사진으로 힐링~ (랜덤으로 1장 보여집니다.)</div>
       <img src={url}></img>
     </div>
   );

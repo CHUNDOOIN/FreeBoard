@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 export const BestBoardWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
   text-align: center;

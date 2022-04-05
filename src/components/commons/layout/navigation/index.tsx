@@ -30,7 +30,7 @@ const MENUS = [
   { name: "자유게시판", page: "/boards" },
   { name: "거래게시판(준비중...)", page: "/markets" },
   { name: "마이페이지(준비중...)", page: "/mypages" },
-  { name: "멍멍이사진", page: "/dogs" },
+  { name: "댕댕이사진", page: "/dogs" },
 ];
 
 export default function LayoutNavigation() {
