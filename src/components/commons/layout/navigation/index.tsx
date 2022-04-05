@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import { Fragment, MouseEvent } from "react";
 
 const Wrapper = styled.div`
   height: 100px;
@@ -9,19 +10,45 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
 
   cursor: pointer;
 
   font-size: 30px;
   font-weight: 900;
+
+  text-align: center;
 `;
+
+const Menu = styled.div`
+  width: 25%;
+  :hover {
+    color: red;
+  }
+`;
+
+const MENUS = [
+  { name: "자유게시판", page: "/boards" },
+  { name: "거래게시판(준비중...)", page: "/markets" },
+  { name: "마이페이지(준비중...)", page: "/mypages" },
+  { name: "멍멍이사진", page: "/dogs" },
+];
 
 export default function LayoutNavigation() {
   const router = useRouter();
 
-  const onClickMoveBoard = () => {
-    router.push("/boards");
+  const onClickMoveBoard = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.target instanceof Element) router.push(event.target.id);
   };
-  return <Wrapper onClick={onClickMoveBoard}>자유게시판</Wrapper>;
+
+  return (
+    <Wrapper>
+      {MENUS.map((el) => (
+        <Fragment key={el.page}>
+          <Menu id={el.page} onClick={onClickMoveBoard}>
+            {el.name}
+          </Menu>
+        </Fragment>
+      ))}
+    </Wrapper>
+  );
 }

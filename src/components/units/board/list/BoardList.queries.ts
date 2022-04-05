@@ -24,3 +24,19 @@ export const FETCH_BOARD_COMMENTS = gql`
     }
   }
 `;
+
+export const FETCH_BOARDS_OF_THE_BEST = gql`
+  query fetchBoardsOfTheBest {
+    fetchBoardsOfTheBest {
+      _id
+      writer
+      title
+      contents
+      likeCount
+      dislikeCount
+      createdAt
+    }
+  }
+`;
+
+// fetchBoardsOfTheBest

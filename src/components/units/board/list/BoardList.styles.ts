@@ -5,6 +5,21 @@ export const Wrapper = styled.div`
   margin: 100px;
 `;
 
+export const BestBoardWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  text-align: center;
+`;
+export const BestBoard = styled.div`
+  width: 282px;
+  font-size: 15px;
+
+  background-color: pink;
+`;
+
 export const TableTop = styled.div`
   border-top: 2px solid gray;
   margin-top: 20px;

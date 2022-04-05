@@ -10,6 +10,7 @@ export interface IBoardListUIProps {
   onClickMoveToBoardNew: () => void;
   data?: any;
   data2?: any;
+  data3?: any;
   refetch: (
     variables: Partial<IQueryFetchBoardsArgs>
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;

@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   align-items: center;
 
   font-size: 50px;
+  font-weight: 900;
 `;
 
 export default function LayoutHeader() {

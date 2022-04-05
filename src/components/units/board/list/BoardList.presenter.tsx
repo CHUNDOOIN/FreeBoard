@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { Fragment } from "react";
 import Paginations01 from "../../../commons/paginations/Paginations01.container";
 import * as S from "./BoardList.styles";
 import { IBoardListUIProps } from "./BoardList.types";
@@ -6,6 +6,13 @@ import { IBoardListUIProps } from "./BoardList.types";
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <S.Wrapper>
+      <S.BestBoardWrapper>
+        {props.data3?.fetchBoardsOfTheBest.map((el: any) => (
+          <Fragment key={el._id}>
+            <S.BestBoard id={el._id}>베트스 게시글 : {el.writer}</S.BestBoard>
+          </Fragment>
+        ))}
+      </S.BestBoardWrapper>
       <S.TableTop />
       <S.Row>
         <S.ColumnHeaderBasic>ID</S.ColumnHeaderBasic>

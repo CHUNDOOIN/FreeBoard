@@ -1,7 +1,11 @@
 import { useQuery, gql } from "@apollo/client";
 import BoardListUI from "./BoardList.presenter";
 import { Router, useRouter } from "next/router";
-import { FETCH_BOARDS, FETCH_BOARD_COMMENTS } from "./BoardList.queries";
+import {
+  FETCH_BOARDS,
+  FETCH_BOARDS_OF_THE_BEST,
+  FETCH_BOARD_COMMENTS,
+} from "./BoardList.queries";
 import { MouseEvent, MouseEventHandler } from "react";
 import {
   IQuery,
@@ -28,6 +32,11 @@ export default function BoardList() {
   });
   console.log("이건 data2", data2);
 
+  const { data: data3 } = useQuery<Pick<IQuery, "fetchBoardsOfTheBest">>(
+    FETCH_BOARDS_OF_THE_BEST
+  );
+  console.log("이건 data3", data3);
+
   // 함수
   const onClickMoveToBoardDetail = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target instanceof Element)
@@ -45,6 +54,7 @@ export default function BoardList() {
       refetch={refetch}
       data={data}
       data2={data2}
+      data3={data3}
     ></BoardListUI>
   );
 }
