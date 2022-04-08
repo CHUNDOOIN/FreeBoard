@@ -46,7 +46,7 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
 
         <S.MainWrap>
           <S.MainTitle>{props.data?.fetchBoard.title}</S.MainTitle>
-          <S.MainImg src={props.data?.fetchBoard.title}></S.MainImg>
+          <S.MainImg src={props.data?.fetchBoard.images}></S.MainImg>
           <S.MainContents>{props.data?.fetchBoard.contents}</S.MainContents>
         </S.MainWrap>
 
@@ -103,11 +103,13 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
               onChange={props.onChangeWriter}
               type="text"
               placeholder="작성자"
+              value={props.writer}
             ></S.WriterInput>
             <S.PasswordInput
               onChange={props.onChangePassword}
               type="password"
               placeholder="비밀번호"
+              value={props.password}
             ></S.PasswordInput>
             <Rate onChange={props.handleChange} value={props.value}></Rate>
           </S.WriterInputWrap>
@@ -117,6 +119,7 @@ export default function BoardDetailUI(props: IBoardDetailUI) {
               maxLength={100}
               onChange={props.onChangeContents}
               placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+              value={props.contents}
             ></S.InputUpWrap>
 
             <S.InputDownWrap>

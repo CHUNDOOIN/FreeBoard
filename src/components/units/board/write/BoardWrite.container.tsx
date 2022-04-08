@@ -1,17 +1,24 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import BoardWriteUI from "./BoardWrite.presenter";
-import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./BoardWrite.queries";
 import {
   IBoardAddress,
   IBoardWriteProps,
   IUpdateBoardInput,
 } from "./BoardWrite.types";
 import { Modal } from "antd";
+import {
+  IMutation,
+  IMutationUploadFileArgs,
+} from "../../../../commons/types/generated/types";
+import { checkFileValidation } from "../../../../commons/libraries/validation";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter();
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [imageUrl, setimageUrl] = useState<string | undefined>("");
 
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +40,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
+
   const [data, setData] = useState("");
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -147,11 +159,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
                 zipcode: zipcode,
                 address: address,
                 addressDetail: addressDetail,
+                images: [imageUrl],
               },
             },
           },
         });
-        // console.log(result.data.createBoard._id);
+        // console.log("result?", result.data.createBoard);
 
         Modal.success({
           title: "게시글 등록 성공",
@@ -200,6 +213,28 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setAddressDetail(event.target.value);
   };
 
+  // 이미지 업로드 부분
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    console.log(file);
+
+    const isVaild = checkFileValidation(file);
+    if (!isVaild) return;
+
+    try {
+      const result = await uploadFile({ variables: { file } });
+      console.log(result.data?.uploadFile.url);
+
+      setimageUrl(result.data?.uploadFile.url);
+    } catch (error: any) {
+      Modal.error({ content: error.massage });
+    }
+  };
+
+  const onClickImage = () => {
+    fileRef.current?.click();
+  };
+
   return (
     <BoardWriteUI
       onChangeWriter={onChangeWriter}
@@ -214,6 +249,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeAddress={onChangeAddress}
       onChangeAddressDetail={onChangeAddressDetail}
       onComplete={handleComplete}
+      // 이미지 업로드?
+      onChangeFile={onChangeFile}
+      onClickImage={onClickImage}
+      //
       isActive={isActive}
       isEdit={props.isEdit}
       isOpen={isOpen}
@@ -225,6 +264,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       titleError={titleError}
       contentsError={contentsError}
       data={props.data}
+      writer={writer}
     ></BoardWriteUI>
   );
 }

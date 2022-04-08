@@ -13,5 +13,5 @@ const Wrapper = styled.div`
 `;
 
 export default function LayoutHeader() {
-  return <Wrapper>🙈 두인이의 자유게시판 🙊</Wrapper>;
+  return <Wrapper>🙈 두인이네 🙊</Wrapper>;
 }

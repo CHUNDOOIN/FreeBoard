@@ -178,6 +178,11 @@ export default function BoardDetail() {
           },
         ],
       });
+      setWriter("");
+      setPassword("");
+      setRating("");
+      setContents("");
+
       Modal.success({
         content: "댓글 등록 성공 하였습니다!",
       });
@@ -278,6 +283,10 @@ export default function BoardDetail() {
       onLoadMore={onLoadMore}
       hasMore={true}
       useWindow={false}
+      // 댓글 작성 후 초기화를 시켜주기 위해.
+      writer={writer}
+      password={password}
+      contents={contents}
     ></BoardDetailUI>
   );
 }

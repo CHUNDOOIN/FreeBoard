@@ -18,6 +18,9 @@ export const BestBoard = styled.div`
   font-size: 15px;
 
   background-color: pink;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const TableTop = styled.div`

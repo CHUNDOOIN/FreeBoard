@@ -28,9 +28,10 @@ const Menu = styled.div`
 
 const MENUS = [
   { name: "자유게시판", page: "/boards" },
+  { name: "오늘의명언", page: "/openapi" },
+  { name: "두인방명록", page: "/firebaseboard" },
   { name: "거래게시판(준비중...)", page: "/markets" },
   { name: "마이페이지(준비중...)", page: "/mypages" },
-  { name: "댕댕이사진", page: "/dogs" },
 ];
 
 export default function LayoutNavigation() {

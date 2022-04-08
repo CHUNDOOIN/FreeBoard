@@ -41,4 +41,7 @@ export interface IBoardDetailUI {
   onLoadMore: () => void;
   hasMore: boolean;
   useWindow: boolean;
+  writer: string;
+  password: string;
+  contents: string;
 }
