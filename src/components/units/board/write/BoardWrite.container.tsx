@@ -264,7 +264,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       titleError={titleError}
       contentsError={contentsError}
       data={props.data}
-      writer={writer}
+      
     ></BoardWriteUI>
   );
 }
