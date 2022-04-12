@@ -1,8 +1,24 @@
-// 수정 페이지
+// 수정 페이지 (등록 페이지와 구분을 위한 isEdit true)
 import BoardWrite from "../../../../src/components/units/board/write/BoardWrite.container";
-import { FETCH_BOARD } from "../../../../src/components/units/board/write/BoardWrite.queries";
 import { useRouter } from "next/router";
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
+
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      writer
+      title
+      contents
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
+      images
+    }
+  }
+`;
 
 export default function BoardEditPage() {
   const router = useRouter();

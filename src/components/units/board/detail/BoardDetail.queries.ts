@@ -1,4 +1,4 @@
-import { useQuery, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -10,91 +10,14 @@ export const FETCH_BOARD = gql`
       youtubeUrl
       likeCount
       dislikeCount
-      images
       boardAddress {
-        _id
         zipcode
         address
         addressDetail
       }
-      user {
-        _id
-        email
-        name
-        picture
-        userPoint {
-          amount
-        }
-      }
+      images
       createdAt
-      updatedAt
-      deletedAt
     }
-  }
-`;
-
-export const DELETE_BOARD = gql`
-  mutation deleteBoard($boardId: ID!) {
-    deleteBoard(boardId: $boardId)
-  }
-`;
-
-export const CREATE_BOARD_COMMENT = gql`
-  mutation createBoardComment(
-    $createBoardCommentInput: CreateBoardCommentInput!
-    $boardId: ID!
-  ) {
-    createBoardComment(
-      createBoardCommentInput: $createBoardCommentInput
-      boardId: $boardId
-    ) {
-      _id
-      writer
-      contents
-      rating
-      createdAt
-      updatedAt
-    }
-  }
-`;
-
-export const FETCH_BOARD_COMMENTS = gql`
-  query fetchBoardComments($page: Int, $boardId: ID!) {
-    fetchBoardComments(page: $page, boardId: $boardId) {
-      _id
-      writer
-      contents
-      rating
-      createdAt
-      updatedAt
-    }
-  }
-`;
-
-export const UPDATE_BOARD_COMMENT = gql`
-  mutation updateBoardComment(
-    $updateBoardCommentInput: UpdateBoardCommentInput!
-    $password: String
-    $boardCommentId: ID!
-  ) {
-    updateBoardComment(
-      updateBoardCommentInput: $updateBoardCommentInput
-      password: $password
-      boardCommentId: $boardCommentId
-    ) {
-      _id
-      writer
-      contents
-      rating
-      createdAt
-      updatedAt
-    }
-  }
-`;
-
-export const DELETE_BOARD_COMMENT = gql`
-  mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
-    deleteBoardComment(boardCommentId: $boardCommentId, password: $password)
   }
 `;
 
@@ -107,24 +30,5 @@ export const LIKE_BOARD = gql`
 export const DISLIKE_BOARD = gql`
   mutation dislikeBoard($boardId: ID!) {
     dislikeBoard(boardId: $boardId)
-  }
-`;
-
-// 게시물 10개씩 보여줌
-export const FETCH_BOARDS = gql`
-  query fetchBoards($page: Int) {
-    fetchBoards(page: $page) {
-      _id
-      writer
-      title
-      contents
-    }
-  }
-`;
-
-//총 게시물 몇개?
-export const FETCH_BOARDS_COUNT = gql`
-  query fetchBoardsCount {
-    fetchBoardsCount
   }
 `;

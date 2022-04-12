@@ -9,7 +9,6 @@ import styled from "@emotion/styled";
 import { firebaseApp } from "../_app";
 import { ChangeEvent, useState } from "react";
 import { Modal } from "antd";
-import { useRouter } from "next/router";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,11 +35,13 @@ const Col = styled.div`
 
 export default function FireBasePage() {
   // 라우터
-  const router = useRouter;
+  // const router = useRouter();
+  // console.log(router);
 
   const [writer, setWriter] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  // 파이어 베이스 데이타는 배열로..
   const [dataBoards, setDataBoards] = useState<DocumentData[]>([]);
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +63,6 @@ export default function FireBasePage() {
       contents: contents,
     });
     Modal.success({
-      title: "게시글 작성 성공",
       content: "게시글 작성 완료",
     });
   };
@@ -73,6 +73,7 @@ export default function FireBasePage() {
     const result = await getDocs(board);
     const boards = result.docs.map((el) => el.data());
     setDataBoards(boards);
+    // 게시글 조회
     console.log(boards);
   };
 

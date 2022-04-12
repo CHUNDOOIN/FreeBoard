@@ -1,325 +1,174 @@
 import styled from "@emotion/styled";
-import { IRegisterButtonProps } from "./BoardWrite.types";
+import { ISubmitButtonProps } from "./BoardWrite.types";
 
-// 페이지 전체 감싸주는 태그
-export const Wrap = styled.div`
+export const Wrapper = styled.div`
   width: 1200px;
   /* height: 1847px; */
-  margin: 100px auto;
-  padding: 80px 102px 100px 102px;
-
-  background: #ffffff;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid black;
+  margin: 100px;
+  padding-top: 80px;
+  padding-bottom: 100px;
+  padding-left: 102px;
+  padding-right: 102px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  box-shadow: 0px 0px 10px gray;
 `;
 
-// 타이틀 텍스트
-export const TitleText = styled.div`
-  width: 100%;
-
+export const Title = styled.div`
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 36px;
-  font-weight: 700;
-  text-align: center;
-
-  color: #000000;
+  font-weight: bold;
 `;
 
-// 작성자, 비밀번호 작성을 감싸주는 태그
-export const InfoWrap = styled.div`
+export const WriterWrapper = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  padding-top: 40px; // 타이틀과 간격
+  padding-top: 40px;
 `;
 
-// 작성자, 비밀번호 작성 왼쪽 부분
-export const InfoWrapLeft = styled.div`
+export const Writer = styled.input`
   width: 486px;
-
-  padding-top: 40px;
-`;
-
-// 작성자, 비밀번호 작성 왼쪽 부분 작성자
-export const LeftWriter = styled.div`
-  width: 100%;
-
-  padding-bottom: 16px;
-`;
-
-// 작성자, 비밀번호 작성 왼쪽 부분 작성자 입력
-export const LeftWriterInput = styled.input`
-  width: 100%;
   height: 52px;
-
-  border: 1px solid #bdbdbd;
   padding-left: 16px;
-
-  font-weight: 400;
-  font-size: 16px;
+  border: 1px solid #bdbdbd;
 `;
 
-// 작성자, 비밀번호 작성오른쪽 부분
-export const InfoWrapRight = styled.div`
+export const Password = styled.input`
   width: 486px;
-
-  padding-top: 40px;
-`;
-
-// 작성자, 비밀번호 작성 오른쪽 부분 패스워드
-export const RightPassword = styled.div`
-  width: 100%;
-
-  padding-bottom: 16px;
-`;
-// 작성자, 비밀번호 작성 오른쪽 부분 패스워드 입력
-export const RightPasswordInput = styled.input`
-  width: 100%;
   height: 52px;
-
-  border: 1px solid #bdbdbd;
   padding-left: 16px;
-
-  font-weight: 400;
-  font-size: 16px;
+  border: 1px solid #bdbdbd;
 `;
 
-// 제목 부분을 감싸주는 태그
-export const TitleWrap = styled.div`
-  width: 100%;
+export const Label = styled.div`
+  padding-bottom: 16px;
+  font-size: 16px;
+  font-weight: 500;
+`;
 
+export const InputWrapper = styled.div`
   padding-top: 40px;
 `;
 
-// 제목 부분
-export const TitleTitle = styled.div`
-  width: 100%;
-
-  padding-bottom: 16px;
-`;
-
-// 제목 입력
-export const TitleInput = styled.input`
-  width: 100%;
+export const Subject = styled.input`
+  width: 996px;
   height: 52px;
-
-  border: 1px solid #bdbdbd;
   padding-left: 16px;
-
-  font-weight: 400;
-  font-size: 16px;
+  border: 1px solid #bdbdbd;
 `;
 
-// 내용을 감싸주는 태그
-export const MainWrap = styled.div`
-  width: 100%;
-
-  padding-top: 40px;
-`;
-
-// 내용 부분
-export const MainTitle = styled.div`
-  width: 100%;
-
-  padding-bottom: 16px;
-`;
-
-// 내용 입력하는 부분
-export const MainInput = styled.textarea`
-  width: 100%;
+export const Contents = styled.textarea`
+  width: 996px;
   height: 480px;
-
+  padding-left: 16px;
+  padding: 14px;
   border: 1px solid #bdbdbd;
-  padding-left: 16px;
-
-  font-weight: 400;
-  font-size: 16px;
-
-  padding-left: 16px;
-  padding-top: 14px;
 `;
 
-// 주소를 감싸주는 태그
-export const AddressWrap = styled.div`
-  width: 100%;
-
-  padding-top: 40px;
-`;
-
-// 주소 부분
-export const AddressTitle = styled.div`
-  width: 100%;
-
-  padding-bottom: 16px;
-`;
-
-// 주소 입력 검색 감싸주는 태그
-export const ZipCodeWrap = styled.div`
+export const ZipcodeWrapper = styled.div`
   display: flex;
   flex-direction: row;
-
-  padding-bottom: 16px;
 `;
 
-// 주소 입력
-export const ZipCode = styled.input`
+export const Zipcode = styled.input`
   width: 77px;
   height: 52px;
-
-  border: 1px solid #bdbdbd;
   padding-left: 16px;
-  margin-right: 16px;
+  border: 1px solid #bdbdbd;
 `;
 
-// 주소 검색창
-export const ZipCodeSearch = styled.button`
+export const SearchButton = styled.button`
   width: 124px;
   height: 52px;
-
-  background: #000000;
-  color: #ffffff;
+  margin-left: 16px;
+  background-color: black;
+  cursor: pointer;
+  color: white;
 `;
 
-// 주소 입력 위칸
-export const AddressInput1 = styled.input`
-  width: 100%;
+export const Address = styled.input`
+  width: 996px;
   height: 52px;
-
-  padding-left: 16px;
-  border: 1px solid #bdbdbd;
-
-  margin-bottom: 16px;
-`;
-
-// 주소 입력 아래칸
-export const AddressInput2 = styled.input`
-  width: 100%;
-  height: 52px;
-
+  margin-top: 16px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
-// 유튜뷰 감싸는 부분
-export const YoutubeWrap = styled.div`
-  width: 100%;
+export const Youtube = styled.input`
+  width: 996px;
+  height: 52px;
+  padding-left: 16px;
+  border: 1px solid #bdbdbd;
+`;
 
+export const ImageWrapper = styled.div`
+  width: 996px;
   padding-top: 40px;
 `;
 
-// 유튜브 제목 부분
-export const YoutubeWrapTitle = styled.div`
-  width: 100%;
-
-  padding-bottom: 16px;
-`;
-
-// 유튜브 인풋
-export const YoutubeWrapInput = styled.input`
-  width: 100%;
-  height: 52px;
-
-  border: 1px solid #bdbdbd;
-  padding-left: 16px;
-
-  font-weight: 400;
-  font-size: 16px;
-`;
-
-// 사진 첨부 부분을 감싸주는 태그
-export const ImageWrap = styled.div`
-  width: 100%;
-
-  padding-top: 40px;
-`;
-
-// 사진 첨부 글씨
-export const ImageTitle = styled.div`
-  width: 100%;
-
-  padding-bottom: 16px;
-`;
-
-// 업로드 부분 감싸주는 태그
-export const ImageUploadWrap = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-`;
-
-// 업로드 버튼
-export const ImageUpload = styled.button`
+export const UploadButton = styled.button`
   width: 78px;
   height: 78px;
-
-  padding-top: 16px;
-
   background-color: #bdbdbd;
   margin-right: 24px;
-
-  color: #4f4f4f;
+  outline: none;
   border: none;
   cursor: pointer;
 `;
 
-// 메인 설정 감싸주는 태그
-export const SetWrap = styled.div`
-  width: 100%;
-
+export const OptionWrapper = styled.div`
+  width: 996px;
   padding-top: 40px;
 `;
 
-//메인 설정 글씨
-export const SetTitle = styled.div`
-  width: 100%;
-
-  padding-bottom: 16px;
-`;
-
-// 버튼1, 2
-export const SetButton = styled.input`
+export const RadioButton = styled.input`
   cursor: pointer;
 `;
 
-// 라벨1, 2
-export const SetLabel = styled.label`
+export const RadioLabel = styled.label`
   margin-left: 8px;
   margin-right: 20px;
   font-weight: 500;
-  font-size: 16px;
-
   cursor: pointer;
 `;
 
-// 등록하기 감싸기
-export const RegisterWrap = styled.div`
+export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-
   padding-top: 80px;
 `;
 
-//등록하기 버튼
-export const RegisterButton = styled.button`
+export const CancelButton = styled.button`
   width: 179px;
   height: 52px;
-
-  color: #4f4f4f;
-  border: 1px solid #bdbdbd;
-  background-color: ${(props: IRegisterButtonProps) =>
-    props.isActive ? "#ffd600" : "#BDBDBD;"};
+  background-color: #bdbdbd;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 12px;
+  margin-right: 12px;
   cursor: pointer;
-  /* :hover {
-    background-color: #ffd600;
-    color: #000000;
-  } */
 `;
 
-// 에러 메시지 출력
+export const SubmitButton = styled.button`
+  width: 179px;
+  height: 52px;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 12px;
+  margin-right: 12px;
+  cursor: pointer;
+
+  background-color: ${(props: ISubmitButtonProps) => (props.isActive ? "yellow" : "none")};
+`;
+
 export const Error = styled.div`
   padding-top: 10px;
   font-size: 14px;

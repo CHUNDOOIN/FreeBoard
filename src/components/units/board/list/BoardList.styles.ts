@@ -1,26 +1,9 @@
 import styled from "@emotion/styled";
+import { ITextTokenProps } from "./BoardList.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
   margin: 100px;
-`;
-
-export const BestBoardWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  text-align: center;
-`;
-export const BestBoard = styled.div`
-  width: 282px;
-  font-size: 15px;
-
-  background-color: pink;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 export const TableTop = styled.div`
@@ -40,7 +23,7 @@ export const Row = styled.div`
   border-bottom: 1px solid gray;
 
   :hover {
-    color: blue;
+    color: red;
   }
 `;
 
@@ -65,7 +48,7 @@ export const ColumnTitle = styled.div`
   cursor: pointer;
 
   :hover {
-    color: blue;
+    color: red;
   }
 `;
 
@@ -92,4 +75,8 @@ export const Button = styled.button`
   :hover {
     background-color: #f5f2fc;
   }
+`;
+
+export const TextToken = styled.span`
+  color: ${(props: ITextTokenProps) => (props.isMatched ? "red" : "black")};
 `;

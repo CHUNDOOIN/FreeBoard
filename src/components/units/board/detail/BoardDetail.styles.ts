@@ -1,603 +1,137 @@
 import styled from "@emotion/styled";
 import ReactPlayer from "react-player";
+import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
 
-// 페이지 전체 감싸주는 태그
-export const Wrap = styled.div`
+export const Wrapper = styled.div`
   width: 1200px;
-  margin: 100px auto;
+  margin: 100px;
 `;
 
-export const InWrap = styled.div`
-  padding: 60px 102px 100px 102px;
-
-  background: #ffffff;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+export const CardWrapper = styled.div`
+  border: 1px solid black;
+  padding-top: 80px;
+  padding-bottom: 100px;
+  padding-left: 102px;
+  padding-right: 102px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  box-shadow: 0px 0px 10px gray;
 `;
 
-// 상단 페이지 감싸주는 태그
-export const HeaderWrap = styled.div`
+export const Header = styled.div`
   width: 100%;
-
-  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #bdbdbd;
   padding-bottom: 20px;
+`;
 
+export const AvatarWrapper = styled.div`
   display: flex;
-
   flex-direction: row;
 `;
 
-// 상단 왼쪽 페이지 감싸주는 태그
-
-export const HeaderLeft = styled.div`
-  width: 498px;
-  padding-top: 60px;
-
-  display: flex;
-
-  flex-direction: row;
-  justify-content: flex-start; ;
+export const Avatar = styled.img`
+  margin-right: 10px;
 `;
 
-export const LeftWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-
-  padding-left: 12px;
-`;
-
-export const LeftImg = styled.img`
-  width: 46.67px;
-  height: 46.67px;
-
-  margin-left: 4.67px;
-  margin-right: 4.67px;
-`;
-
-export const LeftTitle = styled.div`
-  width: 100%;
-
-  font-weight: 500;
-  font-size: 24px;
-`;
-
-export const LeftDate = styled.div`
-  width: 100%;
-
-  font-weight: 400;
-  font-size: 16px;
-
-  color: #828282;
-`;
-
-export const HeaderRight = styled.div`
-  width: 498px;
-
-  display: flex;
-
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-end;
-`;
-
-export const RightTitle = styled.div`
-  width: 376px;
-  height: 64px;
-
-  background-color: #c4c4c4;
-  margin-right: 16px;
-
-  border: 1px solid #ffd600;
-
-  text-align: right;
-
-  font-weight: 500;
-  font-size: 16px;
-  color: #ffffff;
-
-  padding-top: 8px;
-`;
-
-export const RightTry = styled.div`
-  width: 12px;
-  height: 8px;
-
-  background-color: #c4c4c4;
-  border: 1px solid #ffd600;
-  margin-right: 16px;
-`;
-
-export const RightIconWrap = styled.div`
-  width: 100%;
-
-  display: flex;
-
-  flex-direction: row;
-
-  justify-content: flex-end;
-  align-items: center;
-
-  margin-right: 6.67px; ;
-`;
-
-export const RightLinkIcon = styled.img`
-  margin-right: 29.33px;
-`;
-export const RightMapIcon = styled.img``;
-
-// 메인 페이지 감싸주는 태그
-export const MainWrap = styled.div`
-  width: 100%;
-
-  border-top: 1px solid #bdbdbd;
-
-  display: flex;
-  flex-direction: column;
-`;
-
-export const MainTitle = styled.div`
-  width: 100%;
-  margin-top: 80px;
-
-  font-weight: 700;
-  font-size: 36px;
-
-  padding-bottom: 40px;
-`;
-
-export const MainImg = styled.img`
-  width: 100%;
-  height: 480px;
-
-  background-color: aliceblue;
-  margin-bottom: 40px;
-`;
-
-export const MainContents = styled.div`
-  width: 100%;
-  height: 96px;
-
-  font-weight: 400;
-  font-size: 16px;
-`;
-
-// 유튜브 페이지 감싸주는 태그
-export const YoutubeWrap = styled.div`
-  width: 100%;
-  /* background-color: yellow; */
-
-  display: flex;
-
-  flex-direction: row;
-  justify-content: center;
-
-  margin-top: 120px;
-`;
-
-// 유튜브 페이지 감싸주는 태그
-export const Youtube = styled(ReactPlayer)`
-  width: 486px;
-  height: 240px;
-
-  margin: auto;
-
-  /* background-color: red; */
-`;
-
-// 하단 페이지 감싸주는 태그
-export const BottomWrap = styled.div`
-  width: 100%;
-
-  padding-top: 160px;
-
-  display: flex;
-
-  flex-direction: row;
-  justify-content: center;
-
-  margin-bottom: 20px;
-`;
-
-export const BottomLeft = styled.div`
-  width: 40px;
-  height: 51px;
-
+export const Info = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-
-  margin-right: 20px;
 `;
 
-export const LeftUp = styled.img`
-  width: 20px;
-  height: 18px;
-  cursor: pointer;
-`;
+export const Writer = styled.div``;
 
-export const LeftNumber = styled.div`
+export const CreatedAt = styled.div``;
+
+export const Body = styled.div`
   width: 100%;
-
-  font-weight: 400;
-  font-size: 18px;
-
-  color: #ffd600;
-
-  text-align: center;
+  min-height: 800px;
 `;
 
-export const BottomRight = styled.div`
-  width: 40px;
-  height: 51px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  align-items: center;
-
-  margin-left: 20px;
+export const Title = styled.h1`
+  padding-top: 80px;
 `;
 
-export const RightDown = styled.img`
-  width: 20px;
-  height: 18px;
-  cursor: pointer;
+export const Contents = styled.div`
+  padding-top: 40px;
+  padding-bottom: 120px;
 `;
 
-export const RightNumber = styled.div`
-  width: 100%;
-
-  font-weight: 400;
-  font-size: 18px;
-
-  color: #828282;
-
-  text-align: center;
-`;
-
-export const OutWrap = styled.div``;
-
-export const ButtonWarp = styled.div`
-  width: 100%;
-
+export const BottomWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding-top: 80px;
 `;
 
 export const Button = styled.button`
   width: 179px;
   height: 45px;
-
-  font-weight: 500;
-  font-size: 16px;
-
-  color: #828282;
-  border: 1px solid #bdbdbd;
-
-  margin: 80px 12px 80px 12px;
-
+  background-color: white;
+  border: 1px solid gray;
+  margin: 0px 12px;
   cursor: pointer;
+
   :hover {
-    background-color: #ffd600;
-    color: #000000;
+    background-color: gold;
+    border-color: white;
   }
 `;
 
-// 댓글 부분 시작
-export const CommentsWrap = styled.div`
-  width: 100%;
+export const IconWrapper = styled.div`
+  text-align: center;
+`;
 
+export const Youtube = styled(ReactPlayer)`
+  margin: auto;
+`;
+
+export const LikeWrapper = styled.div`
+  padding-top: 160px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-
-  /* border-top: 1px solid #bdbdbd;
-  border-bottom: 1px solid #bdbdbd; */
-
-  padding-top: 40px;
-  padding-bottom: 20px;
-
-  border-top: 1px solid #bdbdbd; ;
 `;
 
-export const WriterWrap = styled.div`
-  width: 100%;
+export const LocationIcon = styled.img``;
 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  padding-bottom: 40px;
+export const LikeIcon = styled(LikeOutlined)`
+  font-size: 24px;
+  color: #ffd600;
+  margin: 0px 20px;
+  cursor: pointer;
 `;
 
-export const WriterIcon = styled.img`
-  width: 20px;
-  height: 20px;
-
-  margin-right: 14px;
-`;
-
-export const Writer = styled.div`
-  width: 100%;
-
-  font-weight: 500;
-  font-size: 18px;
-`;
-
-export const WriterCommentWrap = styled.div`
-  width: 100%;
-`;
-
-export const EditCommentWrap = styled.div`
-  width: 100%;
-`;
-
-// 댓글 작성자, 패스워드, 레이팅
-export const WriterInputWrap = styled.div`
-  width: 100%;
-
-  display: flex;
-
-  flex-direction: row;
-  align-items: center;
-
-  padding-bottom: 20px;
-`;
-
-export const WriterInput = styled.input`
-  width: 180px;
-  height: 52px;
-  border: 1px solid #bdbdbd;
-
-  font-weight: 500;
-  font-size: 16px;
-
+export const DislikeIcon = styled(DislikeOutlined)`
+  font-size: 24px;
   color: #828282;
-  padding-left: 20px;
-  margin-right: 24px;
+  margin: 0px 20px;
+  cursor: pointer;
 `;
 
-export const PasswordInput = styled.input`
-  width: 180px;
-  height: 52px;
-  border: 1px solid #bdbdbd;
+export const LikeCount = styled.div`
+  color: #ffd600;
+`;
 
-  font-weight: 500;
-  font-size: 16px;
-
+export const DislikeCount = styled.div`
   color: #828282;
-  padding-left: 20px;
-  margin-right: 24px;
 `;
 
-export const RatingInput = styled.input`
-  width: 180px;
-  height: 52px;
-  border: 1px solid #bdbdbd;
+export const LinkIcon = styled.img``;
 
-  font-weight: 500;
-  font-size: 16px;
-
-  color: #828282;
-  padding-left: 20px;
-  margin-right: 24px;
-`;
-
-export const Rating = styled.img`
-  width: 20px;
-  height: 20px;
-
-  margin: 0px 2px 0px 2px;
-`;
-
-export const ContentsInputWrap = styled.div`
-  width: 100%;
-  height: 161px;
-
-  /* background-color: blue; */
-  border: 1px solid #bdbdbd;
+export const ImageWrapper = styled.div`
   display: flex;
-
   flex-direction: column;
-  margin-bottom: 20px;
 `;
 
-export const InputUpWrap = styled.textarea`
-  width: 100%;
-  height: 108px;
-  padding: 20px;
-
-  font-weight: 500;
-  font-size: 16px;
-  color: #bdbdbd;
-
-  border: none;
-`;
-
-// 코멘트 작성 아래쪽
-
-export const InputDownWrap = styled.div`
-  width: 100%;
-  height: 52px;
-
-  border-top: 1px solid #f2f2f2;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const ContentsNumber = styled.div`
-  width: 100%;
-
-  margin: 14px 20px 14px 20px;
-
-  color: #bdbdbd;
-`;
-
-export const ContentsButton = styled.button`
-  width: 91px;
-  height: 52px;
-  font-weight: 500;
-  font-size: 16px;
-  text-align: center;
-  background: #000000;
-  color: #ffffff;
-`;
-
-export const InputDownEditWrap = styled.div`
-  width: 100%;
-  height: 52px;
-
-  border-top: 1px solid #f2f2f2;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const ContentsEditNumber = styled.div`
-  width: 100%;
-
-  margin: 14px 20px 14px 20px;
-
-  color: #bdbdbd;
-`;
-
-export const ContentsEditButton = styled.button`
-  width: 91px;
-  height: 52px;
-  font-weight: 500;
-  font-size: 16px;
-  text-align: center;
-  background: #000000;
-  color: #ffffff;
-`;
-
-// export const EditerInputWrap = styled.div`
-//   width: 100%;
-// `;
-
-// export const EditContentsInputWrap = styled.div`
-//   width: 100%;
-// `;
-
-export const Scroll = styled.div`
-  width: 100%;
-  height: 500px;
-
-  overflow: auto;
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* justify-content: space-around; */
-`;
-
-export const ListWrap = styled.div`
-  width: 100%;
-  padding-top: 20px;
-
-  border-bottom: 1px solid #bdbdbd;
-  /* 
-  background-color: yellow; */
-`;
-
-export const ListUpWrap = styled.div`
-  width: 100%;
-
-  display: flex;
-
-  flex-direction: row;
-
-  margin-bottom: 20px;
-`;
-
-// 리스트 유저 사진
-export const ListUpLeft = styled.img`
-  width: 40px;
-  height: 40px;
-
-  margin-right: 16px;
-`;
-
-// 리스트 업 오른쪽 부분
-export const ListUpRight = styled.div`
-  width: 100%;
-  /* background-color: green; */
-`;
-
-export const RightUpWrap = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  align-items: center;
-`;
-
-export const UpWrapLeft = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const UpWrapRight = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
-export const CommentEditIcon = styled.img`
-  width: 18px;
-  height: 18px;
-
-  margin-right: 16px;
-
-  cursor: pointer;
-`;
-export const CommentCancelIcon = styled.img`
-  width: 18px;
-  height: 18px;
-
-  margin-right: 5px;
-
-  cursor: pointer;
-`;
-
-export const RightUpName = styled.div`
-  /* width: 100%; */
-
-  font-weight: 500;
-  font-size: 16px;
-
-  color: #000000;
-
-  margin-right: 16px;
-  margin-bottom: 4px;
-`;
-
-export const RightDownWrap = styled.div`
-  width: 100%;
-`;
-
-export const RightDownContents = styled.div`
-  width: 100%;
-
-  font-weight: 400;
-  font-size: 16px;
-  color: #4f4f4f;
-
-  margin-bottom: 20px;
-`;
-
-export const RightDownDownDate = styled.div`
-  width: 100%;
-  font-weight: 400;
-  font-size: 12px;
-
-  color: #bdbdbd;
+export const Image = styled.img`
+  width: 996px;
+  height: 480px;
+  margin-bottom: 30px;
 `;

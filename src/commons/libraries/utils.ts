@@ -1,3 +1,4 @@
+// 날짜 표기 (2022-01-01)
 export const getDate = (date: any) => {
   const today = new Date(date);
   const yyyy = today.getFullYear();

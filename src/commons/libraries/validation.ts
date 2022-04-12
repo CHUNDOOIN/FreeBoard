@@ -1,3 +1,4 @@
+// 파일 업로드 검증
 export const checkFileValidation = (file?: File) => {
   // 파일이 없다면 튕겨낸다 ( file ? )
 
