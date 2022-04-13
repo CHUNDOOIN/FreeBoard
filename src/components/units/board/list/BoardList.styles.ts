@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ITextTokenProps } from "./BoardList.types";
+// import { ITextTokenProps } from "./BoardList.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -56,7 +56,8 @@ export const Footer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 50px;
+  align-items: center;
+  padding-top: 20px;
 `;
 
 export const PencilIcon = styled.img``;
@@ -77,6 +78,6 @@ export const Button = styled.button`
   }
 `;
 
-export const TextToken = styled.span`
-  color: ${(props: ITextTokenProps) => (props.isMatched ? "red" : "black")};
-`;
+// export const TextToken = styled.span`
+//   color: ${(props: ITextTokenProps) => (props.isMatched ? "red" : "black")};
+// `;

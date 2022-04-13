@@ -1,5 +1,6 @@
 import { Modal } from "antd";
 
+// 파일 업로드 검증부분
 export function checkValidationImage(file: File | undefined) {
   if (!file?.size) {
     Modal.error({ content: "파일이 없습니다." });

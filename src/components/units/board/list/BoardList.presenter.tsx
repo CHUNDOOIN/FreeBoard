@@ -3,11 +3,13 @@ import { getDate } from "../../../../commons/libraries/utils";
 import { IBoardListUIProps } from "./BoardList.types";
 import Paginations01 from "../../../commons/paginations/01/Paginations01.container";
 import Searchbars01 from "../../../commons/searchbars/01/Searchbars01.container";
-import { v4 as uuidv4 } from "uuid";
+import BestBoards01 from "../../../commons/bestboards/01/BestBoards.container";
+// import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <S.Wrapper>
+      <BestBoards01></BestBoards01>
       <Searchbars01
         refetch={props.refetch}
         refetchBoardsCount={props.refetchBoardsCount}
@@ -27,14 +29,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
           </S.ColumnBasic>
           {/* <input type="text" id="bbb" onClick={props.onClickMoveToBoardDetail}/> */}
           <S.ColumnTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
-            {el.title
-              .replaceAll(props.keyword, `@#$%${props.keyword}@#$%`)
-              .split("@#$%")
-              .map((el) => (
-                <S.TextToken key={uuidv4()} isMatched={props.keyword === el}>
-                  {el}
-                </S.TextToken>
-              ))}
+            {el.title}
           </S.ColumnTitle>
           <S.ColumnBasic>{el.writer}</S.ColumnBasic>
           <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>
