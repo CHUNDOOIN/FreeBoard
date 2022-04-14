@@ -22,11 +22,10 @@ export default function BoardCommentListUIItem(
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [myPassword, setMyPassword] = useState("");
 
-  const [deleteBoardComment] =
-    useMutation<
-      Pick<IMutation, "deleteBoardComment">,
-      IMutationDeleteBoardCommentArgs
-    >(DELETE_BOARD_COMMENT);
+  const [deleteBoardComment] = useMutation<
+    Pick<IMutation, "deleteBoardComment">,
+    IMutationDeleteBoardCommentArgs
+  >(DELETE_BOARD_COMMENT);
 
   const onClickUpdate = () => {
     setIsEdit(true);
