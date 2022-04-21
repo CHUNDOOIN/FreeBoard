@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `;
 
 const SliderItem = styled.img`
-  height: 350px;
+  height: 300px;
   margin: auto;
 
   cursor: pointer;

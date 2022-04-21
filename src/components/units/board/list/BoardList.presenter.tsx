@@ -29,7 +29,16 @@ export default function BoardListUI(props: IBoardListUIProps) {
           </S.ColumnBasic>
           {/* <input type="text" id="bbb" onClick={props.onClickMoveToBoardDetail}/> */}
           <S.ColumnTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>
-            {el.title}
+            {
+              el.title
+              // .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
+              // .split("#$%")
+              // .map((el, index) => (
+              //   <S.TextToken key={uuidv4()} isMatched={props.keyword === el}>
+              //     {el}
+              //   </S.TextToken>
+              // ))
+            }
           </S.ColumnTitle>
           <S.ColumnBasic>{el.writer}</S.ColumnBasic>
           <S.ColumnBasic>{getDate(el.createdAt)}</S.ColumnBasic>

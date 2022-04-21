@@ -144,7 +144,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
         console.log(result);
         Modal.success({ content: "게시물 등록에 성공하였습니다!" });
         router.push(`/boards/${result.data.createBoard._id}`);
-      } catch (error) {
+      } catch (error: any) {
         Modal.error({ content: error.message });
       }
     }
@@ -196,7 +196,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       });
       Modal.success({ content: "게시물 수정에 성공하였습니다!" });
       router.push(`/boards/${router.query.boardId}`);
-    } catch (error) {
+    } catch (error: any) {
       Modal.error({ content: error.message });
     }
   };
