@@ -5,12 +5,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Wrapper = styled.div`
-  height: 400px;
+  height: 250px;
   background-color: aliceblue;
 `;
 
 const SliderItem = styled.img`
-  height: 300px;
+  width: 300px;
+  height: 200px;
   margin: auto;
 
   cursor: pointer;
@@ -21,8 +22,8 @@ export default function LayoutBannerUI() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 5,
+    slidesToScroll: 5,
     autoplay: true,
     pause: "hover",
   };
