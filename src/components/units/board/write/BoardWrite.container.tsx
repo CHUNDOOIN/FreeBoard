@@ -207,6 +207,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   }, [props.data]);
 
+  const onToggleModal = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
     <BoardWriteUI
       isActive={isActive}
@@ -225,6 +229,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeFileUrls={onChangeFileUrls}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
+      onToggleModal={onToggleModal}
       isEdit={props.isEdit}
       data={props.data}
       isOpen={isOpen}

@@ -1,3 +1,4 @@
+import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -8,7 +9,9 @@ export const withAuth = (Component) => (props) => {
   // 권한분기 로직
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      alert("로그인 후 이용 가능합니다!");
+      Modal.error({
+        content: "로그인 후 이용 가능합니다!",
+      });
       router.push("/login");
     }
   }, []);

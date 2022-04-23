@@ -46,4 +46,5 @@ export interface IBoardWriteUIProps {
   address: string;
   addressDetail: string;
   fileUrls: string[];
+  onToggleModal: () => void;
 }

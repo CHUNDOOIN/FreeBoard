@@ -9,7 +9,11 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
     <>
       {props.isOpen && (
-        <Modal visible={true}>
+        <Modal
+          visible={true}
+          onOk={props.onToggleModal}
+          onCancel={props.onToggleModal}
+        >
           <DaumPostcode onComplete={props.onCompleteAddressSearch} />
         </Modal>
       )}
