@@ -9,6 +9,7 @@ import styled from "@emotion/styled";
 import { firebaseApp } from "../_app";
 import { ChangeEvent, useState } from "react";
 import { Modal } from "antd";
+import { withAuth } from "../../src/components/commons/hocs/withAuth";
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const Col = styled.div`
 
 // const Wr
 
-export default function FireBasePage() {
+function FireBasePage() {
   // 라우터
   // const router = useRouter();
   // console.log(router);
@@ -111,3 +112,5 @@ export default function FireBasePage() {
     </Wrapper>
   );
 }
+
+export default withAuth(FireBasePage);

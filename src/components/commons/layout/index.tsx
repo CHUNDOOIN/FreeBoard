@@ -3,24 +3,38 @@ import LayoutHeader from "./header";
 import LayoutNavigation from "./navigation";
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
+import { useRouter } from "next/router";
+
+const BodyWrapper = styled.div`
+  display: flex;
+  width: 100%;
+
+  /* background-color: red; */
+  overflow-x: hidden;
+`;
 
 const Body = styled.div`
-  height: 500px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+
+  justify-content: center;
 `;
 
 interface ILayoutProps {
   children: ReactNode;
 }
+
 export default function Layout(props: ILayoutProps) {
+  const router = useRouter();
+  console.log(router);
   return (
     <>
       <LayoutHeader />
       <LayoutBanner />
       <LayoutNavigation />
-      <Body>{props.children}</Body>
+      <BodyWrapper>
+        <Body>{props.children}</Body>
+      </BodyWrapper>
     </>
   );
 }

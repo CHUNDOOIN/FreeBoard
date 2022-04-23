@@ -31,7 +31,7 @@ const MENUS = [
   { name: "거래게시판", page: "/markets" },
   { name: "오늘의명언", page: "/openapi" },
   { name: "두인방명록", page: "/firebaseboard" },
-  { name: "마이페이지(준비중...)", page: "/mypages" },
+  { name: "마이페이지", page: "/mypage" },
 ];
 
 export default function LayoutNavigation() {

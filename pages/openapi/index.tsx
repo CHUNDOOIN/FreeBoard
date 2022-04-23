@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
+import { withAuth } from "../../src/components/commons/hocs/withAuth";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -16,7 +17,7 @@ const Font = styled.div`
   font-size: 30px;
 `;
 
-export default function OpenApiPage() {
+function OpenApiPage() {
   const [url, setUrl] = useState();
 
   useEffect(() => {
@@ -34,3 +35,5 @@ export default function OpenApiPage() {
     </Wrapper>
   );
 }
+
+export default withAuth(OpenApiPage);

@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 const Wrapper = styled.div`
   height: 250px;
   background-color: aliceblue;
+  overflow-x: hidden;
 `;
 
 const SliderItem = styled.img`

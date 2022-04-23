@@ -1,11 +1,3 @@
-// 아폴로 관련 임포트
-import {
-  ApolloClient,
-  ApolloLink,
-  ApolloProvider,
-  InMemoryCache,
-} from "@apollo/client";
-
 // 안트 디자인
 import "antd/dist/antd.css";
 
@@ -19,16 +11,13 @@ import { globalStyles } from "../src/commons/styles/globalStyles";
 // 기본 설정
 import { AppProps } from "next/app";
 
-// 아폴로 이미지 업로드
-import { createUploadLink } from "apollo-upload-client";
-
 // 파이어 베이스
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+// 리코일
+import { RecoilRoot } from "recoil";
+import ApolloSetting from "../src/components/commons/apollo";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAjfa9X6LF6FJ4elvuZaF0i9Px4rDD2MvI",
   authDomain: "dooin2.firebaseapp.com",
@@ -43,22 +32,17 @@ export const firebaseApp = initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
   // 모든 셋팅
-  const uploadLink = createUploadLink({
-    uri: "http://backend06.codebootcamp.co.kr/graphql",
-  });
-
-  const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink]),
-    cache: new InMemoryCache(),
-  });
 
   return (
-    <ApolloProvider client={client}>
-      <Global styles={globalStyles} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <RecoilRoot>
+      <ApolloSetting>
+        <Global styles={globalStyles} />
+        <Layout>
+          {/* 여기 Component는 layout에서의 index.tsx */}
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloSetting>
+    </RecoilRoot>
   );
 }
 

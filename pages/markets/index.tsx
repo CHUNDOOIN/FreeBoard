@@ -1,5 +1,8 @@
 // 마켓글 리스트 페이지
+import { withAuth } from "../../src/components/commons/hocs/withAuth";
 
-export default function MarketListPage() {
+function MarketListPage() {
   return <div></div>;
 }
+
+export default withAuth(MarketListPage);
