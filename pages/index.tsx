@@ -43,12 +43,17 @@ export default function Home() {
   const onClickMoveLogin = () => {
     router.push("/login");
   };
+
+  const onClickMoveSignUp = () => {
+    router.push("/signup");
+  };
+
   return (
     <Wrapper>
       <Text>😁 두인이네 오신걸 환영합니다. 😀</Text>
       <MainImg src="/images/hawaii.jpg"></MainImg>
       <LoginWrapper>
-        <button>회원가입</button>
+        <button onClick={onClickMoveSignUp}>회원가입</button>
         <button onClick={onClickMoveLogin}>로그인</button>
       </LoginWrapper>
     </Wrapper>

@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { withAuth } from "../../src/components/commons/hocs/withAuth";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 // import { useEffect } from "react";
 // import { useRecoilState } from "recoil";
 // import { accessTokenState } from "../../quiz-22.04.12/store";
@@ -15,7 +15,7 @@ const FETCH_USER_LOGGED_IN = gql`
 `;
 
 function MyPage() {
-  // const router = useRouter();
+  const router = useRouter();
   // const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
 
@@ -28,7 +28,17 @@ function MyPage() {
   //   }
   // }, []);
 
-  return <div>{data?.fetchUserLoggedIn.name}님 환영합니다!</div>;
+  const onClickLogout = () => {
+    localStorage.removeItem("accessToken");
+    router.reload();
+  };
+
+  return (
+    <div>
+      <div>{data?.fetchUserLoggedIn.name}님 환영합니다!</div>
+      <button onClick={onClickLogout}>로그아웃</button>
+    </div>
+  );
 }
 
 export default withAuth(MyPage);

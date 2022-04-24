@@ -13,7 +13,6 @@ export default function BestBoards01UI(props: IBestBoards01UIProps) {
             <br /> 작성자 : {el.writer}
             <br /> 제목 : {el.title}
             <br /> 날짜 : {getDate(el.createdAt)}
-            <br /> CSS 준비중...
           </S.BestBoard>
         </Fragment>
       ))}

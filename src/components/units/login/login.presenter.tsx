@@ -1,4 +1,4 @@
-import { ILoginPageUI } from "./login.types";
+import { ILoginPageUI } from "./Login.types";
 
 export default function LoginPageUI(props: ILoginPageUI) {
   return (
@@ -7,7 +7,7 @@ export default function LoginPageUI(props: ILoginPageUI) {
       <br />
       PW : <input type="password" onChange={props.onChangePassword}></input>
       <br />
-      <button>회원가입</button>
+      <button onClick={props.onClickSignUp}>회원가입</button>
       <button onClick={props.onClickLogin}>로그인</button>
     </div>
   );

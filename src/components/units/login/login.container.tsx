@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../commons/store";
-import LoginPageUI from "./login.presenter";
-import { LOGIN_USER } from "./login.query";
+import LoginPageUI from "./Login.presenter";
+import { LOGIN_USER } from "./Login.query";
 
 export default function LoginPage() {
   const [, setAccessToken] = useRecoilState(accessTokenState);
@@ -52,11 +52,16 @@ export default function LoginPage() {
     }
   };
 
+  const onClickSignUp = () => {
+    router.push("/signup");
+  };
+
   return (
     <LoginPageUI
       onChangeEmail={onChangeEmail}
       onChangePassword={onChangePassword}
       onClickLogin={onClickLogin}
+      onClickSignUp={onClickSignUp}
     ></LoginPageUI>
   );
 }
