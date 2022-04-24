@@ -1,54 +1,39 @@
-import BoardListUI from "./BoardList.presenter";
 import { useQuery } from "@apollo/client";
-import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.queries";
 import { useRouter } from "next/router";
-import { MouseEvent, useState } from "react";
+import { MouseEvent } from "react";
 import {
   IQuery,
-  IQueryFetchBoardsArgs,
-  IQueryFetchBoardsCountArgs,
+  IQueryFetchUseditemsArgs,
 } from "../../../../commons/types/generated/types";
+import MarketListUI from "./MarketList.presenter";
+import { FETCH_USED_ITEMS } from "./MarketList.queries";
 
-export default function BoardList() {
+export default function MarketList() {
   const router = useRouter();
-  const [keyword, setKeyword] = useState("");
+
   const { data, refetch } = useQuery<
-    Pick<IQuery, "fetchBoards">,
-    IQueryFetchBoardsArgs
-  >(FETCH_BOARDS);
-  const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery<
-    Pick<IQuery, "fetchBoardsCount">,
-    IQueryFetchBoardsCountArgs
-  >(FETCH_BOARDS_COUNT);
+    Pick<IQuery, "fetchUseditems">,
+    IQueryFetchUseditemsArgs
+  >(FETCH_USED_ITEMS);
 
-  const onClickMoveToBoardNew = () => {
-    router.push("/boards/new");
+  console.log(data);
+  console.log(router);
+
+  const onClickMoveToMarketNew = () => {
+    router.push("/markets/new");
   };
 
-  const onClickMoveToBoardDetail = (event: MouseEvent<HTMLDivElement>) => {
-    // event.target // 태그전체
-    // event.target.value
-    // event.target.id
-
-    // document.getElementById("bbb").value
+  const onClickMoveToMarketDetail = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target instanceof Element)
-      router.push(`/boards/${event.target.id}`);
+      router.push(`/markets/${event.target.id}`);
   };
-
-  function onChangeKeyword(value: string) {
-    setKeyword(value);
-  }
 
   return (
-    <BoardListUI
+    <MarketListUI
       data={data}
-      onClickMoveToBoardNew={onClickMoveToBoardNew}
-      onClickMoveToBoardDetail={onClickMoveToBoardDetail}
       refetch={refetch}
-      refetchBoardsCount={refetchBoardsCount}
-      count={dataBoardsCount?.fetchBoardsCount}
-      keyword={keyword}
-      onChangeKeyword={onChangeKeyword}
+      onClickMoveToMarketNew={onClickMoveToMarketNew}
+      onClickMoveToMarketDetail={onClickMoveToMarketDetail}
     />
   );
 }
