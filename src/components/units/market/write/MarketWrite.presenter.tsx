@@ -18,8 +18,77 @@ export default function MarketWriteUI(props: IMarketWriteUIProps) {
         </Modal>
       )} */}
       <S.Wrapper>
-        {/* <S.Title>{props.isEdit ? "상품 수정하기" : "상품 등록하기"}</S.Title>
-        <S.WriterWrapper>
+        <S.Title>
+          상품 등록하기
+          {/* {props.isEdit ? "상품 수정하기" : "상품 등록하기"} */}
+        </S.Title>
+        <S.ItemWrapper>
+          <S.Label>상품명</S.Label>
+          <S.ItemName placeholder="상품명을 입력해주세요."></S.ItemName>
+        </S.ItemWrapper>
+
+        <S.ItemWrapper>
+          <S.Label>한줄요약</S.Label>
+          <S.ItemName placeholder="한줄요약을 작성해주세요."></S.ItemName>
+        </S.ItemWrapper>
+
+        <S.ItemWrapper>
+          <S.Label>상품설명</S.Label>
+          <S.Contents placeholder="상품설명을 작성해주세요."></S.Contents>
+        </S.ItemWrapper>
+
+        <S.ItemWrapper>
+          <S.Label>판매가격</S.Label>
+          <S.ItemName placeholder="판매가격을 작성해주세요."></S.ItemName>
+        </S.ItemWrapper>
+
+        <S.ItemWrapper>
+          <S.Label>태그입력</S.Label>
+          <S.ItemName placeholder="태그를 작성해주세요."></S.ItemName>
+        </S.ItemWrapper>
+
+        <S.MapWrapper>
+          <S.LeftWrapper>
+            <S.Label>거래위치</S.Label>
+            <S.Map placeholder="거래위치를 작성해주세요."></S.Map>
+          </S.LeftWrapper>
+
+          <S.RightWrapper>
+            <S.RightUpWrapper>
+              <S.Label>GPS</S.Label>
+              <S.RightInputWrapper>
+                <S.RightUpInput placeholder="위도(LAT)"></S.RightUpInput>
+                <S.RightUpInput placeholder="경도(LNG)"></S.RightUpInput>
+              </S.RightInputWrapper>
+            </S.RightUpWrapper>
+
+            <S.RightDownWrapper>
+              <S.Label>주소</S.Label>
+              <S.Address></S.Address>
+              <S.Address2></S.Address2>
+            </S.RightDownWrapper>
+          </S.RightWrapper>
+        </S.MapWrapper>
+
+        <S.ImageWrapper>
+          <S.Label>사진 첨부</S.Label>
+          <S.UploadWrapper>
+            <S.Image></S.Image>
+            <S.Image></S.Image>
+          </S.UploadWrapper>
+        </S.ImageWrapper>
+
+        <S.OptionWrapper>
+          <S.Label>메인설정</S.Label>
+          <S.RadioButton type="radio" id="youtube" name="radio-button" />
+          <S.RadioLabel htmlFor="youtube">유튜브</S.RadioLabel>
+          <S.RadioButton type="radio" id="image" name="radio-button" />
+          <S.RadioLabel htmlFor="image">사진</S.RadioLabel>
+        </S.OptionWrapper>
+
+        <S.Button>등록하기</S.Button>
+
+        {/* <S.WriterWrapper>
           <S.InputWrapper>
             <S.Label>작성자</S.Label>
             <S.Writer
