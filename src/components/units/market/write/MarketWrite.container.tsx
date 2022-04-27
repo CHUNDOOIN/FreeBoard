@@ -1,246 +1,75 @@
-// import { ChangeEvent, useEffect, useState } from "react";
-// import { useRouter } from "next/router";
-// import { useMutation } from "@apollo/client";
-// import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-// import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.types";
-// import { Modal } from "antd";
+import { useMutation } from "@apollo/client";
+import { async } from "@firebase/util";
 import { useRouter } from "next/router";
-// import { useState } from "react";
+import { useState } from "react";
 import MarketWriteUI from "./MarketWrite.presenter";
+import { CREATE_USED_ITEM } from "./MarketWrite.queries";
 import { IMarketWriteProps } from "./MarketWrite.types";
 
 export default function MarketWrite(props: IMarketWriteProps) {
   const router = useRouter();
   console.log(router);
-  // const [isActive, setIsActive] = useState(false);
-  // const [isOpen, setIsOpen] = useState(false);
 
-  // const [createBoard] = useMutation(CREATE_BOARD);
-  // const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [createUseditem] = useMutation(CREATE_USED_ITEM);
 
-  // const [writer, setWriter] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [title, setTitle] = useState("");
-  // const [contents, setContents] = useState("");
-  // const [youtubeUrl, setYoutubeUrl] = useState("");
-  // const [zipcode, setZipcode] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [addressDetail, setAddressDetail] = useState("");
-  // const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  const [name, setName] = useState("");
+  const [remarks, setRemarks] = useState("");
+  const [contents, setContents] = useState("");
+  const [price, setPrice] = useState("");
+  const [tags, setTags] = useState("");
 
-  // const [writerError, setWriterError] = useState("");
-  // const [passwordError, setPasswordError] = useState("");
-  // const [titleError, setTitleError] = useState("");
-  // const [contentsError, setContentsError] = useState("");
+  const onChangeName = (event) => {
+    setName(event.target.value);
+  };
+  const onChangeRemarks = (event) => {
+    setRemarks(event.target.value);
+  };
+  const onChangeContents = (event) => {
+    setContents(event.target.value);
+  };
+  const onChangePrice = (event) => {
+    setPrice(event.target.value);
+  };
+  const onChangeTag = (event) => {
+    setTags(event.target.value);
+  };
 
-  // const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setWriter(event.target.value);
-  //   if (event.target.value !== "") {
-  //     setWriterError("");
-  //   }
-
-  //   // if (event.target.value !== "" && password !== "" && title !== "" && contents !== "") {
-  //   if (event.target.value && password && title && contents) {
-  //     setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-  // };
-
-  // const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setPassword(event.target.value);
-  //   if (event.target.value !== "") {
-  //     setPasswordError("");
-  //   }
-
-  //   // if (writer !== "" && event.target.value !== "" && title !== "" && contents !== "") {
-  //   if (writer && event.target.value && title && contents) {
-  //     setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-  // };
-
-  // const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setTitle(event.target.value);
-  //   if (event.target.value !== "") {
-  //     setTitleError("");
-  //   }
-
-  //   // if (writer !== "" && password !== "" && event.target.value !== "" && contents !== "") {
-  //   if (writer && password && event.target.value && contents) {
-  //     setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-  // };
-
-  // const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
-  //   setContents(event.target.value);
-  //   if (event.target.value !== "") {
-  //     setContentsError("");
-  //   }
-
-  //   // if (writer !== "" && password !== "" && title !== "" && event.target.value !== "") {
-  //   if (writer && password && title && event.target.value) {
-  //     setIsActive(true);
-  //   } else {
-  //     setIsActive(false);
-  //   }
-  // };
-
-  // const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setYoutubeUrl(event.target.value);
-  // };
-
-  // const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setAddressDetail(event.target.value);
-  // };
-
-  // const onClickAddressSearch = () => {
-  //   setIsOpen(true);
-  // };
-
-  // const onCompleteAddressSearch = (data: any) => {
-  //   setAddress(data.address);
-  //   setZipcode(data.zonecode);
-  //   setIsOpen(false);
-  // };
-
-  // const onChangeFileUrls = (fileUrl: string, index: number) => {
-  //   const newFileUrls = [...fileUrls];
-  //   newFileUrls[index] = fileUrl;
-  //   setFileUrls(newFileUrls);
-  // };
-
-  // const onClickSubmit = async () => {
-  //   if (writer === "") {
-  //     setWriterError("작성자를 입력해주세요.");
-  //   }
-  //   if (password === "") {
-  //     setPasswordError("비밀번호를 입력해주세요.");
-  //   }
-  //   if (title === "") {
-  //     setTitleError("제목을 입력해주세요.");
-  //   }
-  //   if (contents === "") {
-  //     setContentsError("내용을 입력해주세요.");
-  //   }
-  //   if (writer !== "" && password !== "" && title !== "" && contents !== "") {
-  //     try {
-  //       const result = await createBoard({
-  //         variables: {
-  //           createBoardInput: {
-  //             writer,
-  //             password,
-  //             title,
-  //             contents,
-  //             youtubeUrl,
-  //             boardAddress: {
-  //               zipcode,
-  //               address,
-  //               addressDetail,
-  //             },
-  //             images: fileUrls,
-  //           },
-  //         },
-  //       });
-  //       console.log(result);
-  //       Modal.success({ content: "게시물 등록에 성공하였습니다!" });
-  //       router.push(`/boards/${result.data.createBoard._id}`);
-  //     } catch (error: any) {
-  //       Modal.error({ content: error.message });
-  //     }
-  //   }
-  // };
-
-  // const onClickUpdate = async () => {
-  //   const currentFiles = JSON.stringify(fileUrls);
-  //   const defaultFiles = JSON.stringify(props.data.fetchBoard.images);
-  //   const isChangedFiles = currentFiles !== defaultFiles;
-
-  //   if (
-  //     !title &&
-  //     !contents &&
-  //     !youtubeUrl &&
-  //     !address &&
-  //     !addressDetail &&
-  //     !zipcode &&
-  //     !isChangedFiles
-  //   ) {
-  //     alert("수정한 내용이 없습니다.");
-  //     return;
-  //   }
-
-  //   if (!password) {
-  //     alert("비밀번호를 입력해주세요.");
-  //     return;
-  //   }
-
-  //   const updateBoardInput: IUpdateBoardInput = {};
-  //   if (title) updateBoardInput.title = title;
-  //   if (contents) updateBoardInput.contents = contents;
-  //   if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
-  //   if (zipcode || address || addressDetail) {
-  //     updateBoardInput.boardAddress = {};
-  //     if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
-  //     if (address) updateBoardInput.boardAddress.address = address;
-  //     if (addressDetail)
-  //       updateBoardInput.boardAddress.addressDetail = addressDetail;
-  //   }
-  //   if (isChangedFiles) updateBoardInput.images = fileUrls;
-
-  //   try {
-  //     await updateBoard({
-  //       variables: {
-  //         boardId: router.query.boardId,
-  //         password,
-  //         updateBoardInput,
-  //       },
-  //     });
-  //     Modal.success({ content: "게시물 수정에 성공하였습니다!" });
-  //     router.push(`/boards/${router.query.boardId}`);
-  //   } catch (error: any) {
-  //     Modal.error({ content: error.message });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (props.data?.fetchBoard.images?.length) {
-  //     setFileUrls([...props.data?.fetchBoard.images]);
-  //   }
-  // }, [props.data]);
-
-  // const onToggleModal = () => {
-  //   setIsOpen((prev) => !prev);
-  // };
+  const onClickSubmit = async () => {
+    try {
+      const result = await createUseditem({
+        variables: {
+          createUseditemInput: {
+            name: name,
+            remarks: remarks,
+            contents: contents,
+            price: parseInt(price),
+            tags: tags,
+            images: ["123"],
+            useditemAddress: {
+              zipcode: "123123",
+              address: "123123",
+              addressDetail: "123123",
+              lat: 123,
+              lng: 123,
+            },
+          },
+        },
+      });
+      alert("상품 등록 성공");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <MarketWriteUI
-    // isActive={isActive}
-    // writerError={writerError}
-    // passwordError={passwordError}
-    // titleError={titleError}
-    // contentsError={contentsError}
-    // onChangeWriter={onChangeWriter}
-    // onChangePassword={onChangePassword}
-    // onChangeTitle={onChangeTitle}
-    // onChangeContents={onChangeContents}
-    // onChangeYoutubeUrl={onChangeYoutubeUrl}
-    // onChangeAddressDetail={onChangeAddressDetail}
-    // onClickAddressSearch={onClickAddressSearch}
-    // onCompleteAddressSearch={onCompleteAddressSearch}
-    // onChangeFileUrls={onChangeFileUrls}
-    // onClickSubmit={onClickSubmit}
-    // onClickUpdate={onClickUpdate}
-    // onToggleModal={onToggleModal}
-    // isEdit={props.isEdit}
-    // data={props.data}
-    // isOpen={isOpen}
-    // zipcode={zipcode}
-    // address={address}
-    // addressDetail={addressDetail}
-    // fileUrls={fileUrls}
-    />
+      onChangeName={onChangeName}
+      onChangeRemarks={onChangeRemarks}
+      onChangeContents={onChangeContents}
+      onChangePrice={onChangePrice}
+      onChangeTag={onChangeTag}
+      onClickSubmit={onClickSubmit}
+      isEdit={props.isEdit}
+    ></MarketWriteUI>
   );
 }

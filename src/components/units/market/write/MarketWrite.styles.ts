@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ISubmitButtonProps } from "./MarketWrite.types";
+// import { ISubmitButtonProps } from "./MarketWrite.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -27,6 +27,17 @@ export const Title = styled.div`
 
 export const ItemWrapper = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  padding-top: 0px;
+
+  padding-bottom: 40px;
+`;
+
+export const ReactQuillWrapper = styled.div`
+  width: 100%;
+  height: 300px;
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
@@ -115,6 +126,7 @@ export const Address = styled.input`
   height: 52px;
   display: flex;
   flex-direction: column;
+  padding-left: 16px;
 
   margin-bottom: 16px;
 `;
@@ -123,6 +135,7 @@ export const Address2 = styled.input`
   width: 588px;
   height: 52px;
   display: flex;
+  padding-left: 16px;
   flex-direction: column;
 `;
 
