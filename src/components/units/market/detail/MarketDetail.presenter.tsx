@@ -2,6 +2,7 @@ import { getDate } from "../../../../commons/libraries/utils";
 import { IMarketDetailUIProps } from "./MarketDetail.types";
 import * as S from "./MarketDetail.styles";
 import { Tooltip } from "antd";
+import Dompurify from "dompurify";
 
 export default function MarketDetailUI(props: IMarketDetailUIProps) {
   return (
@@ -39,7 +40,21 @@ export default function MarketDetailUI(props: IMarketDetailUIProps) {
                 />
               ))}
           </S.ImageWrapper>
-          <S.Contents>{props.data?.fetchUseditem?.contents}</S.Contents>
+          <S.Contents>
+            {/* {props.data?.fetchUseditem.contents} */}
+            {/* <div>{props.data?.fetchUseditem.contents}</div> */}
+            {typeof window !== "undefined" ? (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: Dompurify.sanitize(
+                    props.data?.fetchUseditem.contents
+                  ),
+                }}
+              ></div>
+            ) : (
+              <div></div>
+            )}
+          </S.Contents>
           {props.data?.fetchUseditem.youtubeUrl && (
             <S.Youtube
               url={props.data?.fetchUseditem.youtubeUrl}
@@ -47,7 +62,7 @@ export default function MarketDetailUI(props: IMarketDetailUIProps) {
               height="240px"
             />
           )}
-          <S.LikeWrapper>
+          {/* <S.LikeWrapper>
             <S.IconWrapper>
               <S.LikeIcon onClick={props.onClickLike} />
               <S.LikeCount>{props.data?.fetchUseditem.likeCount}</S.LikeCount>
@@ -58,7 +73,7 @@ export default function MarketDetailUI(props: IMarketDetailUIProps) {
                 {props.data?.fetchUseditem.dislikeCount}
               </S.DislikeCount>
             </S.IconWrapper>
-          </S.LikeWrapper>
+          </S.LikeWrapper> */}
         </S.Body>
       </S.CardWrapper>
       <S.BottomWrapper>

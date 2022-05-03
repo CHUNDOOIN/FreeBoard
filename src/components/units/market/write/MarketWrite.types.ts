@@ -21,4 +21,5 @@ export interface ISubmitButtonProps {
 
 export interface IMarketWriteUIProps {
   isEdit: boolean;
+  onChangeContents: () => void;
 }

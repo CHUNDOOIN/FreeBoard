@@ -7,9 +7,9 @@ import { IMarketWriteUIProps } from "./MarketWrite.types";
 
 import "react-quill/dist/quill.snow.css";
 // import Editor01 from "../../../commons/editor/01/Editor01";
-// import dynamic from "next/dynamic";
-import Editor01 from "../../../commons/editor/01/Editor01";
-// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import dynamic from "next/dynamic";
+// import Editor01 from "../../../commons/editor/01/Editor01";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function MarketWriteUI(props: IMarketWriteUIProps) {
   return (
@@ -48,7 +48,12 @@ export default function MarketWriteUI(props: IMarketWriteUIProps) {
           <S.Label>상품설명</S.Label>
           <S.ReactQuillWrapper>
             {/* <Editor01></Editor01> */}
-            <Editor01 onChange={props.onChangeRemarks}></Editor01>
+            <ReactQuill
+              onChange={props.onChangeContents}
+              style={{ width: "100%", height: "320px", font: "Serif" }}
+            ></ReactQuill>
+
+            {/* <Editor01 onChange={props.onChangeContents}></Editor01> */}
           </S.ReactQuillWrapper>
           {/* <S.Contents placeholder="상품설명을 작성해주세요."></S.Contents> */}
         </S.ItemWrapper>

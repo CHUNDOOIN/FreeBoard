@@ -18,7 +18,7 @@ export const TableBottom = styled.div`
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
-  height: 200px;
+  /* height: 200px; */
   line-height: 52px;
   border-bottom: 1px solid gray;
 
@@ -80,4 +80,8 @@ export const Button = styled.button`
 
 export const TextToken = styled.span`
   color: ${(props: ITextTokenProps) => (props.isMatched ? "red" : "black")};
+`;
+
+export const Scroll = styled.div`
+  overflow: auto;
 `;
