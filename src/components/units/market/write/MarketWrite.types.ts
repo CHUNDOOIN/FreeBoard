@@ -1,3 +1,5 @@
+import { IQuery } from "../../../../commons/types/generated/types";
+
 export interface IMarketWriteProps {
   isEdit: boolean;
   data?: any;
@@ -21,5 +23,14 @@ export interface ISubmitButtonProps {
 
 export interface IMarketWriteUIProps {
   isEdit: boolean;
-  onChangeContents: () => void;
+  onChangeContents: (value: string) => void;
+  onChangeFileUrls: any;
+  getValues: any;
+  register: any;
+  handleSubmit: any;
+  formState: any;
+  onClickSubmit: any;
+  onClickEdit: any;
+  data?: Pick<IQuery, "fetchUseditem">;
+  fileUrls: string[];
 }

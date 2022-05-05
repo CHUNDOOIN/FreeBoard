@@ -52,31 +52,6 @@ export default function MarketList() {
       setA([...a, (event.target as HTMLButtonElement).id]);
       console.log(a);
     };
-  // const onClickMoveToMarketDetail = (event: MouseEvent<HTMLDivElement>) => {
-  //   if (event.target instanceof Element)
-  //     router.push(`/markets/${event.target.id}`);
-
-  // };
-
-  // const onClickBasket = (aaa: any) => (event: any) => {
-  //   console.log(aaa);
-  //   setDeleteList((prev: boolean) => !prev);
-  //   const todayWatchList = JSON.parse(
-  //     localStorage.getItem("todayWatchList") || "[]"
-  //   );
-
-  //   const temp = todayWatchList.filter(
-  //     (basketEl: any) => basketEl._id === aaa._id
-  //   );
-  //   if (temp.length === 1) {
-  //     return 200;
-  //   }
-  //   const { __typename, ...newAAA } = aaa;
-  //   todayWatchList.push(newAAA);
-  //   localStorage.setItem("todayWatchList", JSON.stringify(todayWatchList));
-  //   setA([...a, (event.target as HTMLButtonElement).id]);
-  //   console.log(a);
-  // };
 
   const onClickPicked = async (event: MouseEvent<HTMLDivElement>) => {
     if (event.target instanceof Element)
