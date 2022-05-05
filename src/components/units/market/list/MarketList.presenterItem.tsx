@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import * as S from "./MarketList.styles";
 
-export default function MarketListUIItem(props: IMarketListUIItemProps) {
+export default function MarketListUIItem(props: any) {
   const [isBasket, setIsBasket] = useState(false);
 
   useEffect(() => {
     const baskets = JSON.parse(localStorage.getItem("baskets") || "[]");
-    const a = baskets.map((el) => el._id);
+    const a = baskets.map((el: any) => el._id);
 
     if (a.includes(props.el._id)) {
       setIsBasket(true);
@@ -14,13 +14,13 @@ export default function MarketListUIItem(props: IMarketListUIItemProps) {
   }, []);
 
   // 담기
-  const onclickBasket = (el) => () => {
+  const onclickBasket = (el: any) => () => {
     // 1. 기존 장바구니 가져오기
     const baskets = JSON.parse(localStorage.getItem("baskets") || "[]");
     // console.log("1번 확인", baskets);
 
     // 2. 이미 담겼는지 확인하기
-    const temp = baskets.filter((basketEl) => basketEl._id === el._id);
+    const temp = baskets.filter((basketEl: any) => basketEl._id === el._id);
     if (temp.length === 1) {
       alert("이미 담으신 물품입니다!!!");
       return;
@@ -38,22 +38,24 @@ export default function MarketListUIItem(props: IMarketListUIItemProps) {
   // =================================================================
 
   // 담기 취소
-  const onclickDelete = (el) => () => {
+  const onclickDelete = (el: any) => () => {
     const baskets = JSON.parse(localStorage.getItem("baskets") || "[]");
 
-    const newBaskets = baskets.filter((basketEl) => basketEl._id !== el._id);
+    const newBaskets = baskets.filter(
+      (basketEl: any) => basketEl._id !== el._id
+    );
     localStorage.setItem("baskets", JSON.stringify(newBaskets));
     setIsBasket((prev) => !prev);
   };
 
   return (
-    <S.Row key={props.el._id}>
+    <S.Row key={props.el._id} onClick={props.onClickToday}>
       <S.ColumnBasic>
         {String(props.el._id).slice(-4).toUpperCase()}
       </S.ColumnBasic>
       <S.ColumnTitle
         id={props.el._id}
-        onClick={props.onClickMoveToMarketDetail}
+        onClick={props.onClickMoveToMarketDetail(props.el)}
       >
         {props.el.name}
       </S.ColumnTitle>

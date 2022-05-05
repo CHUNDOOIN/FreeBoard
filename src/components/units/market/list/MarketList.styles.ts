@@ -2,8 +2,42 @@ import styled from "@emotion/styled";
 import { ITextTokenProps } from "./MarketList.types";
 
 export const Wrapper = styled.div`
+  width: 100%;
+  margin: 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+export const TodayListWrapper = styled.div`
+  width: 200px;
+  margin-right: 25px;
+  padding-top: 75px;
+  text-align: center;
+
+  font-size: 30px;
+  font-weight: 900;
+
+  display: flex;
+  flex-direction: column;
+`;
+
+export const TodayList = styled.div`
+  width: 100%;
+  height: 300px;
+
+  /* background-color: red; */
+
+  margin-top: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+export const TableWrapper = styled.div`
   width: 1200px;
-  margin: 100px;
 `;
 
 export const TableTop = styled.div`

@@ -53,7 +53,7 @@ export default function MarketDetail() {
     router.push(`/markets/${router.query.marketId}/edit`);
   };
 
-  const onClickDelete = (event) => {
+  const onClickDelete = (event: any) => {
     try {
       deleteUseditem({
         variables: { useditemId: String(router.query.marketId) },

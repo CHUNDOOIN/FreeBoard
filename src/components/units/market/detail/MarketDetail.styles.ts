@@ -59,8 +59,9 @@ export const Title = styled.h1`
 `;
 
 export const Contents = styled.div`
-  padding-top: 40px;
-  padding-bottom: 120px;
+  padding-bottom: 14px;
+
+  font-size: 30px;
 `;
 
 export const BottomWrapper = styled.div`
@@ -99,7 +100,9 @@ export const LikeWrapper = styled.div`
   justify-content: center;
 `;
 
-export const LocationIcon = styled.img``;
+export const LocationIcon = styled.div`
+  width: 50px;
+`;
 
 export const LikeIcon = styled(LikeOutlined)`
   font-size: 24px;
